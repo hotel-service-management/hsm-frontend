@@ -1,0 +1,49 @@
+steps:
+#step 1
+- name: 'gcr.io/cloud-builders/docker'
+  entrypoint: 'bash'
+  args: [
+   '-c',
+   'docker pull gcr.io/kmitl-hsm/hsm-frontend:latest || exit 0'
+  ]
+  id: 'init'
+  waitFor: ['-']
+#step 2
+- name: gcr.io/cloud-builders/docker
+  args: [
+   'build',
+   '-t',
+   'gcr.io/kmitl-hsm/hsm-frontend:$COMMIT_SHA',
+   '.'
+  ]
+  id: 'build'
+  waitFor: ['init']
+#step 3
+- name: 'gcr.io/cloud-builders/docker'
+  entrypoint: 'bash'
+  args: [
+   '-c',
+   'docker push gcr.io/kmitl-hsm/hsm-frontend:latest || exit 0'
+  ]
+  id: 'push'
+  waitFor: ['init', 'build']
+#step 4
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: [
+   'set',
+   'image',
+   'deployment',
+   'hsm-frontend',
+   'hsm-frontend=gcr.io/kmitl-hsm/hsm-frontend:$COMMIT_SHA',
+   '--namespace=hsm'
+  ]
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=asia-southeast1-a'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=hsm'
+  id: 'deploy'
+  waitFor: ['init', 'build', 'push']
+# push images to Google Container Registry with tags
+images: [
+   'gcr.io/kmitl-hsm/hsm-frontend:$COMMIT_SHA',
+   'gcr.io/kmitl-hsm/hsm-frontend:latest'
+]
