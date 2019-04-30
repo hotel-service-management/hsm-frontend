@@ -10,19 +10,26 @@
               </v-toolbar>
               <v-card-text>
                 <v-form>
-                  <v-text-field prepend-icon="person" name="login" label="Login" type="text"></v-text-field>
+                  <v-text-field prepend-icon="fa-user" name="login" label="Login" type="text"></v-text-field>
                   <v-text-field
-                    prepend-icon="lock"
+                    prepend-icon="fa-lock"
                     name="password"
                     label="Password"
                     id="password"
                     type="password"
-                  ></v-text-field>
+                  />
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary">Login</v-btn>
+                <v-btn color="primary">
+                  Register
+                  <v-icon right dark>fa-user-plus</v-icon>
+                </v-btn>
+                <v-btn color="primary">
+                  Login
+                  <v-icon right dark>fa-sign-in-alt</v-icon>
+                </v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
