@@ -22,11 +22,11 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary">
+                <v-btn color="primary" to="/register">
                   Register
                   <v-icon right dark>fa-user-plus</v-icon>
                 </v-btn>
-                <v-btn color="primary">
+                <v-btn color="success">
                   Login
                   <v-icon right dark>fa-sign-in-alt</v-icon>
                 </v-btn>

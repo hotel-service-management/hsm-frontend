@@ -1,7 +1,10 @@
 export default {
   state: {
     refresh: '',
-    access: ''
+    access: '',
+    info: {
+
+    }
   },
   mutations: {},
   actions: {}
