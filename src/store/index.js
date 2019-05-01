@@ -7,7 +7,6 @@ import navigation from './modules/navigation'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  namespace: true,
   modules: {
     user,
     navigation

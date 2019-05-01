@@ -10,13 +10,22 @@
               </v-toolbar>
               <v-card-text>
                 <v-form>
-                  <v-text-field prepend-icon="fa-user" name="login" label="Login" type="text"></v-text-field>
+                  <v-text-field
+                    prepend-icon="fa-user"
+                    name="email"
+                    v-model="email"
+                    label="E-Mail"
+                    type="text"
+                    :error-messages="error.email"
+                  />
                   <v-text-field
                     prepend-icon="fa-lock"
                     name="password"
                     label="Password"
                     id="password"
+                    v-model="password"
                     type="password"
+                    :error-messages="error.password"
                   />
                 </v-form>
               </v-card-text>
@@ -26,7 +35,7 @@
                   Register
                   <v-icon right dark>fa-user-plus</v-icon>
                 </v-btn>
-                <v-btn color="success">
+                <v-btn color="success" @click="doLogin">
                   Login
                   <v-icon right dark>fa-sign-in-alt</v-icon>
                 </v-btn>
@@ -40,8 +49,52 @@
 </template>
 
 <script>
-export default {
+import axios from 'axios'
+import { mapMutations, mapActions, mapState } from 'vuex'
+import store from '@/store/index'
 
+const instance = axios.create()
+
+instance.interceptors.response.use(response => {
+  return { error: false, ...response.data }
+}, error => {
+  return { error: true, ...error.response.data }
+})
+
+export default {
+  data: function () {
+    return {
+    }
+  },
+  computed: {
+    email: {
+      get () {
+        return this.$store.state.user.email
+      },
+      set (value) {
+        store.commit('user/setEmail', value)
+      }
+    },
+    password: {
+      get () {
+        return this.$store.state.user.password
+      },
+      set (value) {
+        store.commit('user/setPassword', value)
+      }
+    },
+    ...mapState({
+      'error': state => state.user.error
+    })
+  },
+  methods: {
+    ...mapMutations({
+      setToken: 'setToken'
+    }),
+    ...mapActions({
+      doLogin: 'user/doLogin'
+    })
+  }
 }
 </script>
 

@@ -21,9 +21,9 @@ export default {
     open: state => state.navigation.drawer.open
   }),
   methods: {
-    ...mapMutations([
-      'drawerOpen'
-    ])
+    ...mapMutations({
+      drawerOpen: 'navigation/drawerOpen'
+    })
   }
 }
 </script>

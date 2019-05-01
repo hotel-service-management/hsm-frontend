@@ -48,9 +48,9 @@ export default {
     }
   },
   methods: {
-    ...mapMutations([
-      'drawerMini'
-    ])
+    ...mapMutations({
+      drawerMini: 'navigation/drawerMini'
+    })
   }
 }
 </script>

@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from './store/index'
 import Login from './views/Login.vue'
 
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
   routes: [
     {
       path: '/',
@@ -19,7 +20,10 @@ export default new Router({
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: () => import('./views/Dashboard.vue')
+      component: () => import('./views/Dashboard.vue'),
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/about',
@@ -28,3 +32,17 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters['user/isLoggedIn']) {
+      next()
+      return
+    }
+    next('/')
+  } else {
+    next()
+  }
+})
+
+export default router
