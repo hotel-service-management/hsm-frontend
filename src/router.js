@@ -37,8 +37,18 @@ let router = new Router({
       }
     },
     {
-      path: '/privilege',
+      path: '/booking/detail/:id',
+      name: 'bookingDetail',
+      props: true,
+      component: () => import('./views/booking/Detail.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/privilege/:id',
       name: 'privilege',
+      props: true,
       component: () => import('./views/Privilege.vue'),
       meta: {
         requiresAuth: true

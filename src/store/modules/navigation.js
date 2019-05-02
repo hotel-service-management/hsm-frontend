@@ -12,10 +12,10 @@ export default {
       clippedLeft: true
     },
     items: [
-      { title: 'Dashboard', icon: 'fa-tachometer-alt', link: '/dashboard' },
+      // { title: 'Dashboard', icon: 'fa-tachometer-alt', link: '/dashboard' },
       { title: 'Booking', icon: 'fa-book', link: '/booking' },
       // { title: 'Booking Detail', icon: 'fa-book-open', link: '/booking' },
-      { title: 'Privileges', icon: 'fa-certificate', link: '/privilege' },
+      // { title: 'Privileges', icon: 'fa-certificate', link: '/privilege' },
       { title: 'Services', icon: 'fa-concierge-bell', link: '/service' },
       { title: 'Review', icon: 'fa-pencil-alt', link: '/review' }
     ]

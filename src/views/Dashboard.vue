@@ -1,17 +1,19 @@
 <template>
   <v-app>
     <nav-bar/>
-    <v-content>Dashboard</v-content>
+    <loading/>
   </v-app>
 </template>
 
 <script>
 import NavBar from '@/components/NavBar.vue'
+import Loading from '@/components/Loading.vue'
 // import authInstance from '@/util/auth'
 
 export default {
   components: {
-    NavBar
+    NavBar,
+    Loading
   }
 }
 </script>

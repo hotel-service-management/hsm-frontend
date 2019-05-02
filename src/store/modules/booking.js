@@ -4,16 +4,25 @@ import authInstance from '@/util/auth'
 export default {
   namespaced: true,
   state: {
-    bookings: []
+    bookings: [],
+    booking: {}
   },
   mutations: {
-    setBooking (state, payload) {
+    setBookings (state, payload) {
       state.bookings = payload
+    },
+    setBooking (state, payload) {
+      state.booking = payload
     }
   },
   actions: {
-    async getBooking ({ commit }) {
+    async getBookings ({ commit, dispatch }) {
       let booking = await authInstance.get('/booking/').then(r => r.data)
+
+      commit('setBookings', booking)
+    },
+    async getBooking ({ commit, dispatch }, id) {
+      let booking = await authInstance.get(`/booking/${id}/`).then(r => r.data)
 
       commit('setBooking', booking)
     }
