@@ -1,13 +1,12 @@
 <template>
   <v-app>
     <nav-bar/>
-    <v-content>Dashboard</v-content>
+    <v-content>Booking</v-content>
   </v-app>
 </template>
 
 <script>
 import NavBar from '@/components/NavBar.vue'
-// import authInstance from '@/util/auth'
 
 export default {
   components: {

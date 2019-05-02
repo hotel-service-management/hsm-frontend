@@ -1,5 +1,6 @@
 import axios from 'axios'
 import router from '@/router'
+import authInstance from '@/util/auth'
 
 const instance = axios.create()
 
@@ -37,6 +38,12 @@ export default {
     },
     setError (state, payload) {
       state.error = payload
+    },
+    setInfo (state, payload) {
+      state.info = payload
+    },
+    setAccess (state, payload) {
+      state.access = payload
     }
   },
   actions: {
@@ -46,8 +53,14 @@ export default {
         localStorage.setItem('access', token.access)
         localStorage.setItem('refresh', token.refresh)
         commit('setToken', token)
+
+        let info = await authInstance.get('/auth/user')
+
+        console.log(info)
+
         commit('setEmail', '')
         commit('setPassword', '')
+
         router.push('/dashboard')
       }
 
@@ -64,15 +77,22 @@ export default {
         })
       }
     },
-    doLogout ({ commit }) {
+    async doLogout ({ commit }) {
+      // Clear Local Storage
       localStorage.removeItem('access')
       localStorage.removeItem('refresh')
+
+      // Clear up store
+      commit('setToken', { access: '', refresh: '' })
       commit('setEmail', '')
       commit('setPassword', '')
+
+      // Redirect Home
       router.push('/')
     }
   },
   getters: {
-    isLoggedIn: state => !!state.access && !!state.refresh
+    isLoggedIn: state => !!state.access && !!state.refresh,
+    getToken: state => ({ access: state.access, refresh: state.refresh })
   }
 }

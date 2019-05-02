@@ -1,10 +1,10 @@
 import axios from 'axios'
-import store from '../store/index'
+import store from '@/store/index'
 
 let authInstance = axios.create({
   baseURL: `/api`,
   headers: {
-    'Authorization': 'Token ' + store.state.user.access
+    'Authorization': 'Token ' + (localStorage.getItem('access') || '')
   }
 })
 
@@ -20,7 +20,7 @@ function addSubscriber (callback) {
 }
 
 async function fetchAccessToken () {
-  const { refresh } = store.state.user
+  const refresh = (localStorage.getItem('refresh') || '')
 
   let token = await axios.post('/api/auth/login/refresh/', { refresh })
 
@@ -37,12 +37,13 @@ authInstance.interceptors.response.use((response) => response, (error) => {
   if (status === 403) {
     if (!isAlreadyFetchingAccessToken) {
       isAlreadyFetchingAccessToken = true
-      fetchAccessToken().then(accessToken => {
-        store.dispatch('user/accessToken', {})
+      fetchAccessToken().then(token => {
+        store.commit('user/setAccess', token)
+        localStorage.setItem('access', token)
         isAlreadyFetchingAccessToken = false
-        onAccessTokenFetched(accessToken)
+        onAccessTokenFetched(token)
       }).catch(err => {
-        // Send logout!
+        store.dispatch('user/doLogout')
         console.log('catched', err)
       })
     }
