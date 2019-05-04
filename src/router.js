@@ -45,6 +45,14 @@ let router = new Router({
       }
     },
     {
+      path: '/booking/pay',
+      name: 'pay_booking',
+      component: () => import('./views/booking/Payment.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: '/booking/detail/:id',
       name: 'bookingDetail',
       props: true,

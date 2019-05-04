@@ -70,7 +70,7 @@
           </v-flex>
         </v-layout>
         <v-layout row justify-center>
-          <v-btn color="success">Pay</v-btn>
+          <v-btn color="success" to="/booking/pay">Pay</v-btn>
         </v-layout>
       </v-container>
     </v-content>
