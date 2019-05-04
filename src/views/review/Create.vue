@@ -7,9 +7,18 @@
           <h1>Write Review</h1>
         </v-layout>
         <v-layout row wrap>
-          <v-flex xs12 md6>
+          <v-flex xs12 md12>
             <v-text-field label="Title" placeholder="Title"></v-text-field>
           </v-flex>
+          <v-flex xs12 md12>
+            <v-text-field type="number" max="10" min="0" title="Score" label="Score"></v-text-field>
+          </v-flex>
+          <v-flex xs12 md12>
+            <v-textarea name="input-7-1" label="Detail" hint="Tell us what you think"/>
+          </v-flex>
+        </v-layout>
+        <v-layout justify-center>
+          <v-btn color="success">Create</v-btn>
         </v-layout>
       </v-container>
     </v-content>
