@@ -1,39 +1,26 @@
 <template>
   <v-app>
     <nav-bar/>
-    <v-wait for="loading booking">
+    <v-wait for="loading privilege">
       <template slot="waiting">
         <loading/>
       </template>
       <v-content>
         <v-container fluid>
           <v-layout row>
-            <h1>Booking Detail #{{booking.id}}</h1>
-          </v-layout>
-          <v-layout row>
-            <h2>{{booking.start_date}} to {{booking.end_date}}</h2>
+            <h1>Privilege(s)</h1>
           </v-layout>
           <v-container fluid grid-list-lg>
             <v-flex xs12 lg12>
               <v-layout row wrap>
-                <v-flex xs12 md4 v-for="room in booking.detail" :key="room.id">
+                <v-flex xs12 md3 v-for="privilege in privileges" :key="privilege.id">
                   <v-card color="blue" dark>
                     <v-card-title primary-title>
                       <div>
-                        <div class="headline">Room #{{ room.room.room_number }}</div>
-                        <span>
-                          Floor : {{room.room.floor}}
-                          <br>
-                          Price : {{room.room.price}}
-                          <br>
-                          Type : {{room.room.type}}
-                        </span>
+                        <div class="headline">{{privilege.type}} - {{privilege.title}}</div>
+                        <span>{{privilege.detail}}</span>
                       </div>
                     </v-card-title>
-                    <v-card-actions>
-                      <v-btn color="success" dark :to="`/privilege/${room.id}`">Privileges</v-btn>
-                      <v-btn color="success" dark :to="`/service/${room.id}`">Services</v-btn>
-                    </v-card-actions>
                   </v-card>
                 </v-flex>
               </v-layout>
@@ -60,16 +47,16 @@ export default {
   },
   computed: {
     ...mapState({
-      booking: state => state.booking.booking
+      privileges: state => state.privilege.privileges
     })
   },
   methods: {
-    ...mapWaitingActions('booking', {
-      getBooking: 'loading booking'
+    ...mapWaitingActions('privilege', {
+      getPrivileges: 'loading privilege'
     })
   },
   beforeMount () {
-    this.getBooking(this.id)
+    this.getPrivileges(this.id)
   }
 }
 </script>
