@@ -30,6 +30,7 @@
                   <v-card-actions>
                     <v-btn color="success" dark :to="`/booking/detail/${booking.id}`">Detail</v-btn>
                     <v-btn color="#77C6FF">Receipt</v-btn>
+                    <v-btn color="error">Check out</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-flex>
