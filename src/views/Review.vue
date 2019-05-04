@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <nav-bar/>
-    <v-wait for="loading services">
+    <v-wait for="loading bookings">
       <template slot="waiting">
         <loading/>
       </template>
@@ -10,30 +10,39 @@
           <v-layout row>
             <h1>Your Reviews</h1>
           </v-layout>
-          <v-layout row wrap>
-            <v-flex xs12 md8>
-              <v-container fluid grid-list-lg fill-height>
-                <v-layout row wrap>
-                  <v-flex xs12 md4 v-for="service in services" :key="service.id">
-                    <v-card color="blue" dark>
-                      <v-card-title primary-title>
-                        <div>
-                          <div class="headline">{{service.type}} - {{service.title}}</div>
-                          <span>Price : {{service.price}}</span>
-                        </div>
-                      </v-card-title>
-                      <v-card-actions>
-                        <v-btn color="success" dark :to="`/booking/detail/${service.id}`">Order</v-btn>
-                      </v-card-actions>
-                    </v-card>
-                  </v-flex>
-                </v-layout>
-              </v-container>
-            </v-flex>
-            <v-flex xs12 md4>
-              <v-container fluid></v-container>
-            </v-flex>
-          </v-layout>
+          <v-container fluid grid-list-lg fill-height>
+            <v-layout row wrap>
+              <fragment v-for="booking in bookings" :key="booking.id">
+                <v-flex xs12 md4>
+                  <v-card color="blue" dark>
+                    <v-card-title primary-title>
+                      <div>
+                        <div class="headline">Booking #{{ booking.id }}</div>
+                        <span>
+                          Date {{ booking.start_date }} to {{ booking.end_date }}
+                          <br>
+                          Total Room : {{ booking.detail.length }}
+                        </span>
+                      </div>
+                    </v-card-title>
+                  </v-card>
+                </v-flex>
+                <v-flex xs12 md6>
+                  <v-card color="blue" dark>
+                    <v-card-title primary-title>
+                      <div>
+                        <div class="headline">Nice Place!</div>
+                        <span>
+                          Score : 9/10
+                          <br>Nice hotel location!
+                        </span>
+                      </div>
+                    </v-card-title>
+                  </v-card>
+                </v-flex>
+              </fragment>
+            </v-layout>
+          </v-container>
         </v-container>
       </v-content>
     </v-wait>
@@ -54,16 +63,16 @@ export default {
   },
   computed: {
     ...mapState({
-      services: state => state.service.services
+      bookings: state => state.booking.bookings
     })
   },
   methods: {
-    ...mapWaitingActions('service', {
-      getServices: 'loading services'
+    ...mapWaitingActions('booking', {
+      getBookings: 'loading bookings'
     })
   },
   beforeMount () {
-    this.getServices()
+    this.getBookings()
   }
 }
 </script>
