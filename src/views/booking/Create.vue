@@ -69,6 +69,9 @@
             </v-layout>
           </v-flex>
         </v-layout>
+        <v-layout row justify-center>
+          <v-btn color="success">Pay</v-btn>
+        </v-layout>
       </v-container>
     </v-content>
   </v-app>

@@ -63,8 +63,17 @@ let router = new Router({
       }
     },
     {
-      path: '/service/:id',
+      path: '/service',
       name: 'service',
+      props: true,
+      component: () => import('./views/Service.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/service/:id',
+      name: 'serviceDetail',
       props: true,
       component: () => import('./views/Service.vue'),
       meta: {
