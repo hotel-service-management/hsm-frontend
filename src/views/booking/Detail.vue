@@ -14,7 +14,7 @@
             <h2>{{booking.start_date}} to {{booking.end_date}}</h2>
           </v-layout>
           <v-container fluid grid-list-lg>
-            <v-flex xs12 lg8>
+            <v-flex xs12 lg12>
               <v-layout row wrap>
                 <v-flex xs12 md4 v-for="room in booking.detail" :key="room.id">
                   <v-card color="blue" dark>
@@ -31,7 +31,8 @@
                       </div>
                     </v-card-title>
                     <v-card-actions>
-                      <v-btn color="success" dark :to="`/privilege/${room.id}`">Privilege</v-btn>
+                      <v-btn color="success" dark :to="`/privilege/${room.id}`">Privileges</v-btn>
+                      <v-btn color="success" dark :to="`/service/${room.id}`">Services</v-btn>
                     </v-card-actions>
                   </v-card>
                 </v-flex>

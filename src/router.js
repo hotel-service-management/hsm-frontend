@@ -37,6 +37,14 @@ let router = new Router({
       }
     },
     {
+      path: '/booking/create',
+      name: 'create_booking',
+      component: () => import('./views/booking/Create.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: '/booking/detail/:id',
       name: 'bookingDetail',
       props: true,
@@ -55,8 +63,9 @@ let router = new Router({
       }
     },
     {
-      path: '/service',
+      path: '/service/:id',
       name: 'service',
+      props: true,
       component: () => import('./views/Service.vue'),
       meta: {
         requiresAuth: true
@@ -71,9 +80,12 @@ let router = new Router({
       }
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import('./views/About.vue')
+      path: '/review/create/:id',
+      name: 'create_review',
+      component: () => import('./views/review/Create.vue'),
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 })
