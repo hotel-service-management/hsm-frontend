@@ -61,7 +61,7 @@ export default {
         commit('setEmail', '')
         commit('setPassword', '')
 
-        router.push('/dashboard')
+        router.push('/booking')
       }
 
       // Django validations

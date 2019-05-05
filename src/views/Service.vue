@@ -14,7 +14,7 @@
             <v-flex xs12 md8>
               <v-container fluid grid-list-lg fill-height>
                 <v-layout row wrap>
-                  <v-flex xs12 md4 v-for="service in services" :key="service.id">
+                  <v-flex xs12 md6 v-for="service in services" :key="service.id">
                     <v-card color="blue" dark>
                       <v-card-title primary-title>
                         <div>

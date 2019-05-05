@@ -15,7 +15,7 @@
           </v-layout>
           <v-container fluid grid-list-lg fill-height>
             <v-layout row wrap>
-              <v-flex xs12 md4 v-for="booking in bookings" :key="booking.id">
+              <v-flex xs12 sm6 md4 v-for="booking in bookings" :key="booking.id">
                 <v-card color="blue" dark>
                   <v-card-title primary-title>
                     <div>
