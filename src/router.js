@@ -53,6 +53,15 @@ let router = new Router({
       }
     },
     {
+      path: '/booking/checkout/:id',
+      name: 'bookingCheckout',
+      props: true,
+      component: () => import('./views/checkout/Summary.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: '/booking/detail/:id',
       name: 'bookingDetail',
       props: true,
