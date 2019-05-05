@@ -21,6 +21,16 @@ let router = new Router({
       component: () => import('./views/Register.vue')
     },
     {
+      path: '/profile',
+      name: 'profile',
+      component: () => import('./views/Profile.vue')
+    },
+    {
+      path: '/profile/edit',
+      name: 'profileEdit',
+      component: () => import('./views/profile/Edit.vue')
+    },
+    {
       path: '/dashboard',
       name: 'dashboard',
       component: () => import('./views/Dashboard.vue'),
@@ -71,7 +81,7 @@ let router = new Router({
       }
     },
     {
-      path: '/privilege/:id',
+      path: '/booking/privilege/:id',
       name: 'privilege',
       props: true,
       component: () => import('./views/Privilege.vue'),

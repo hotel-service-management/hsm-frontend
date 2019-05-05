@@ -31,7 +31,7 @@
                       </div>
                     </v-card-title>
                     <v-card-actions>
-                      <v-btn color="success" dark :to="`/privilege/${room.id}`">Privileges</v-btn>
+                      <v-btn color="success" dark :to="`/booking/privilege/${room.id}`">Privileges</v-btn>
                       <v-btn color="success" dark :to="`/service/${room.id}`">Services</v-btn>
                     </v-card-actions>
                   </v-card>

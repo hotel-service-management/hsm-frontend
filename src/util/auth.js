@@ -40,6 +40,7 @@ authInstance.interceptors.response.use((response) => response, (error) => {
       fetchAccessToken().then(token => {
         store.commit('user/setAccess', token)
         localStorage.setItem('access', token)
+        authInstance.defaults.headers['Authorization'] = 'Token ' + token
         isAlreadyFetchingAccessToken = false
         onAccessTokenFetched(token)
       }).catch(err => {
@@ -50,7 +51,7 @@ authInstance.interceptors.response.use((response) => response, (error) => {
 
     const retryOriginalRequest = new Promise((resolve) => {
       addSubscriber(accessToken => {
-        originalRequest.headers.Authorization = 'Token ' + accessToken
+        originalRequest.headers['Authorization'] = 'Token ' + accessToken
         resolve(axios(originalRequest))
       })
     })
