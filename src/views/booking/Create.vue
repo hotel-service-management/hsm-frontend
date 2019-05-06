@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <nav-bar/>
-    <v-wait for="loading rooms">
+    <v-wait for="loading room">
       <template slot="waiting">
         <loading/>
       </template>
@@ -71,7 +71,7 @@
             </v-flex>
           </v-layout>
           <v-layout row wrap>
-            <v-flex md6 v-for="(i,index) in form.rooms" :key="index">
+            <v-flex md6 v-for="(i,index) in form.room" :key="index">
               <v-layout row>
                 <v-flex pa-1>
                   <h2>
@@ -90,7 +90,7 @@
                     item-value="id"
                     label="Available Room"
                     title="Available Room"
-                    v-model="form.rooms[index]"
+                    v-model="form.room[index]"
                   ></v-select>
                 </v-flex>
               </v-layout>
@@ -98,7 +98,7 @@
           </v-layout>
           <v-layout row justify-center>
             <v-btn color="success" @click="addRoom">Add Room</v-btn>
-            <v-btn color="success" to="/booking/pay" :disabled="disabled">Book</v-btn>
+            <v-btn color="success" @click="doCreateBooking" :disabled="disabled">Book</v-btn>
           </v-layout>
         </v-container>
       </v-content>
@@ -107,7 +107,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import { mapWaitingActions } from 'vue-wait'
 
 import NavBar from '@/components/NavBar.vue'
@@ -123,7 +123,7 @@ export default {
       startDateMenu: false,
       endDateMenu: false,
       form: {
-        rooms: [null],
+        room: [null],
         start_date: new Date().toISOString().substr(0, 10),
         end_date: new Date().toISOString().substr(0, 10)
       }
@@ -134,18 +134,21 @@ export default {
       availableRoom: state => state.booking.availableRoom
     }),
     disabled () {
-      return !this.form.rooms.every(r => r !== null) || this.form.rooms.length === 0
+      return !this.form.room.every(r => r !== null) || this.form.room.length === 0
     }
   },
   methods: {
     ...mapWaitingActions('booking', {
-      getAvailableRoom: 'loading rooms'
+      getAvailableRoom: 'loading room'
     }),
     ...mapMutations({
       setCreateForm: 'booking/setCreateForm'
     }),
+    ...mapActions({
+      doCreateBooking: 'booking/doCreateBooking'
+    }),
     addRoom () {
-      this.form.rooms.push(null)
+      this.form.room.push(null)
     },
     dateChange () {
       this.getAvailableRoom({ startDate: this.form.start_date, endDate: this.form.end_date })
@@ -154,7 +157,7 @@ export default {
       return new Date(value).toISOString().substr(0, 10) >= new Date().toISOString().substr(0, 10)
     },
     deleteRoom (index) {
-      this.form.rooms.splice(index, 1)
+      this.form.room.splice(index, 1)
     }
   },
   watch: {

@@ -1,5 +1,6 @@
 // import axios from 'axios'
 import authInstance from '@/util/auth'
+import router from '@/router'
 
 export default {
   namespaced: true,
@@ -41,6 +42,16 @@ export default {
       rooms = rooms.map(r => ({ ...r, title: `(${r.type}) ${r.room_number} - ${r.price} THB` }))
 
       commit('setAvailableRooms', rooms)
+    },
+    async doCreateBooking ({ commit, state }) {
+      if (confirm('Are you sure to book?')) {
+        let info = await authInstance.get('/auth/user').then(r => r.data)
+        console.log(info)
+
+        let booking = await authInstance.post(`/booking/`, { ...state.createForm, owner: info.user.id }).then(r => r.data)
+
+        router.push(`/booking/payment/${booking.id}`)
+      }
     }
   }
 }

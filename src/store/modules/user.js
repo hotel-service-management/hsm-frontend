@@ -63,7 +63,6 @@ export default {
         commit('setToken', token)
 
         let info = await authInstance.get('/auth/user').then(r => r.data)
-        console.log(info)
 
         commit('setEmail', '')
         commit('setPassword', '')
