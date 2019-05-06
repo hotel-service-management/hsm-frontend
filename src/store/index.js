@@ -6,6 +6,7 @@ import navigation from './modules/navigation'
 import booking from './modules/booking'
 import privilege from './modules/privilege'
 import service from './modules/service'
+import review from './modules/review'
 
 Vue.use(Vuex)
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
     booking,
     privilege,
     service,
+    review,
     user,
     navigation
   }
