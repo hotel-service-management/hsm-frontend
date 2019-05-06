@@ -4,12 +4,8 @@ import authInstance from '@/util/auth'
 export default {
   namespaced: true,
   state: {
-    error: {
-
-    },
-    review: {
-
-    }
+    error: {},
+    review: {}
   },
   mutations: {
     setError (state, payload) {
@@ -36,5 +32,5 @@ export default {
       }
     }
   },
-  getters: { }
+  getters: {}
 }

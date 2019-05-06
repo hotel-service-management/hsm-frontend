@@ -16,6 +16,9 @@ export default {
     setBooking (state, payload) {
       state.booking = payload
     },
+    setCreateForm (state, payload) {
+      state.createForm = payload
+    },
     setAvailableRooms (state, payload) {
       state.availableRoom = payload
     }
@@ -31,8 +34,11 @@ export default {
 
       commit('setBooking', booking)
     },
-    async getAvailableRoom ({ commit }, startDate, endDate) {
+    async getAvailableRoom ({ commit }, date) {
+      const { startDate, endDate } = date
       let rooms = await authInstance.get(`/booking/room/?start_date=${startDate}&&end_date=${endDate}`).then(r => r.data)
+
+      rooms = rooms.map(r => ({ ...r, title: `(${r.type}) ${r.room_number} - ${r.price} THB` }))
 
       commit('setAvailableRooms', rooms)
     }
