@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <nav-bar/>
-    <v-wait for="loading profile">
+    <v-wait for="loading user">
       <template slot="waiting">
         <loading/>
       </template>
@@ -43,7 +43,7 @@
                   </v-form>
                 </v-card-text>
                 <v-card-actions>
-                  <v-btn color="error" to="/booking">
+                  <v-btn color="error" to="/profile">
                     <v-icon left dark>fa-times</v-icon>Cancel
                   </v-btn>
                   <v-spacer></v-spacer>
@@ -69,22 +69,23 @@ import NavBar from '@/components/NavBar.vue'
 import Loading from '@/components/Loading.vue'
 
 export default {
+  name: 'Profile',
   components: {
     NavBar,
     Loading
   },
   computed: {
     ...mapState({
-      bookings: state => state.booking.bookings
+      info: state => state.user.info
     })
   },
   methods: {
-    ...mapWaitingActions('profile', {
-      getBookings: 'loading profile'
+    ...mapWaitingActions('user', {
+      doGetInfo: 'loading user'
     })
   },
   beforeMount () {
-    this.getBookings()
+    this.doGetInfo()
   }
 }
 </script>

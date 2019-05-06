@@ -145,6 +145,15 @@ let router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '/payment/completed',
+      name: 'paymentCompleted',
+      props: true,
+      component: () => import('./views/payment/Completed.vue'),
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 })

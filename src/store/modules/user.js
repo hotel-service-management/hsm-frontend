@@ -116,6 +116,10 @@ export default {
 
       // Redirect Home
       router.push('/')
+    },
+    async doGetInfo ({ commit }) {
+      let info = await authInstance.get('/auth/user').then(r => r.data)
+      commit('setUser', { ...info.user })
     }
   },
   getters: {

@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <nav-bar/>
-    <v-wait for="loading profile">
+    <v-wait for="loading user">
       <template slot="waiting">
         <loading/>
       </template>
@@ -14,58 +14,51 @@
                   <v-toolbar-title>Your Profile</v-toolbar-title>
                 </v-toolbar>
                 <v-card-text>
-                  <v-form>
-                    <v-text-field
-                      prepend-icon="fa-user"
-                      name="username"
-                      label="Username"
-                      type="text"
-                    ></v-text-field>
-                    <v-text-field
-                      prepend-icon="fa-lock"
-                      name="password"
-                      label="Password"
-                      type="password"
-                    />
-                    <v-text-field
-                      prepend-icon="fa-lock"
-                      name="cpassword"
-                      label="Confirm Password"
-                      type="password"
-                    />
-                    <v-text-field
-                      prepend-icon="fa-file-signature"
-                      name="firstname"
-                      label="Firstname"
-                      type="text"
-                    ></v-text-field>
-                    <v-text-field
-                      prepend-icon="fa-file-signature"
-                      name="lastname"
-                      label="Lastname"
-                      type="text"
-                    ></v-text-field>
-                    <v-text-field
-                      prepend-icon="fa-phone"
-                      name="phone"
-                      label="Phone Number"
-                      type="text"
-                    ></v-text-field>
-                    <v-textarea
-                      prepend-icon="fa-address-card"
-                      auto-grow
-                      name="address"
-                      label="Address"
-                      rows="2"
-                    ></v-textarea>
-                  </v-form>
+                  <v-list light>
+                    <v-list-tile>
+                      <v-list-tile-action>
+                        <v-icon color="lighten-1">fa-user</v-icon>
+                      </v-list-tile-action>
+                      <v-list-tile-content>
+                        <v-list-tile-title>{{info.username}}</v-list-tile-title>
+                        <v-list-tile-sub-title>Username</v-list-tile-sub-title>
+                      </v-list-tile-content>
+                    </v-list-tile>
+                    <v-list-tile>
+                      <v-list-tile-action>
+                        <v-icon color="lighten-1">fa-file-signature</v-icon>
+                      </v-list-tile-action>
+                      <v-list-tile-content>
+                        <v-list-tile-title>{{info.first_name}} {{info.last_name}}</v-list-tile-title>
+                        <v-list-tile-sub-title>Name</v-list-tile-sub-title>
+                      </v-list-tile-content>
+                    </v-list-tile>
+                    <v-list-tile>
+                      <v-list-tile-action>
+                        <v-icon color="lighten-1">fa-address-card</v-icon>
+                      </v-list-tile-action>
+                      <v-list-tile-content>
+                        <v-list-tile-title>{{info.address}}</v-list-tile-title>
+                        <v-list-tile-sub-title>Address</v-list-tile-sub-title>
+                      </v-list-tile-content>
+                    </v-list-tile>
+                    <v-list-tile>
+                      <v-list-tile-action>
+                        <v-icon color="lighten-1">fa-phone</v-icon>
+                      </v-list-tile-action>
+                      <v-list-tile-content>
+                        <v-list-tile-title>{{info.phone_number}}</v-list-tile-title>
+                        <v-list-tile-sub-title>Phone Number</v-list-tile-sub-title>
+                      </v-list-tile-content>
+                    </v-list-tile>
+                  </v-list>
                 </v-card-text>
                 <v-card-actions>
                   <v-btn color="primary" to="/booking">
                     <v-icon left dark>fa-long-arrow-alt-left</v-icon>Back
                   </v-btn>
                   <v-spacer></v-spacer>
-                  <v-btn color="success">
+                  <v-btn color="success" to="/profile/edit">
                     Edit
                     <v-icon right dark>fa-edit</v-icon>
                   </v-btn>
@@ -87,22 +80,23 @@ import NavBar from '@/components/NavBar.vue'
 import Loading from '@/components/Loading.vue'
 
 export default {
+  name: 'Profile',
   components: {
     NavBar,
     Loading
   },
   computed: {
     ...mapState({
-      bookings: state => state.booking.bookings
+      info: state => state.user.info
     })
   },
   methods: {
-    ...mapWaitingActions('profile', {
-      getBookings: 'loading profile'
+    ...mapWaitingActions('user', {
+      doGetInfo: 'loading user'
     })
   },
   beforeMount () {
-    this.getBookings()
+    this.doGetInfo()
   }
 }
 </script>
