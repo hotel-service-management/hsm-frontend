@@ -46,7 +46,8 @@ export default {
       if (confirm('Are you sure to order?')) {
         let order = await authInstance.post('/order/', {
           booking_detail_id: id,
-          service: state.cart.map(s => s.id)
+          service: state.cart.map(s => s.id),
+          total_price: state.cart.reduce((a, b) => a + b.price, 0)
         }).then(r => r.data)
         commit('setCart', [])
         router.push(`/order/${order.id}`)
