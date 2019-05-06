@@ -29,7 +29,7 @@
                   </v-card-title>
                   <v-card-actions>
                     <v-btn color="success" dark :to="`/booking/detail/${booking.id}`">Detail</v-btn>
-                    <v-btn color="#77C6FF">Receipt</v-btn>
+                    <v-btn color="#77C6FF" :to="`/booking/receipt/${booking.id}`">Receipt</v-btn>
                     <v-btn color="error" :to="`/booking/checkout/${booking.id}`">Check out</v-btn>
                   </v-card-actions>
                 </v-card>

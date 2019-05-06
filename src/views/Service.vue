@@ -66,7 +66,7 @@
                     <v-btn
                       color="success"
                       :disabled="cart.length === 0"
-                      @click="doSubmitOrder"
+                      @click="doSubmitOrder(id)"
                     >Order</v-btn>
                   </v-card-actions>
                 </v-card>
@@ -80,10 +80,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import { mapWaitingActions } from 'vue-wait'
-import router from '@/router'
-import authInstance from '@/util/auth'
 
 import NavBar from '@/components/NavBar.vue'
 import Loading from '@/components/Loading.vue'
@@ -97,12 +95,13 @@ export default {
   },
   data: () => {
     return {
-      cart: []
+
     }
   },
   computed: {
     ...mapState({
-      services: state => state.service.services.sort((a, b) => a.type < b.type)
+      services: state => state.service.services.sort((a, b) => a.type < b.type),
+      cart: state => state.service.cart
     }),
     total () {
       let total = this.cart.reduce((a, b) => a + b.price, 0)
@@ -113,23 +112,11 @@ export default {
     ...mapWaitingActions('service', {
       getServices: 'loading services'
     }),
-    addService (service) {
-      let id = this.cart.map(s => s.id)
-      if (!id.includes(service.id)) {
-        this.cart.push(service)
-      }
-    },
-    deleteService (index) {
-      this.cart.splice(index, 1)
-    },
-    async doSubmitOrder () {
-      if (confirm('Are you sure to order?')) {
-        let order = await authInstance.post('/order/', { booking_detail_id: this.id,
-          service: this.cart.map(s => s.id) })
-        console.log(order)
-        // router.push(`/booking`)
-      }
-    }
+    ...mapActions({
+      addService: 'service/addService',
+      deleteService: 'service/deleteService',
+      doSubmitOrder: 'service/doSubmitOrder'
+    })
   },
   beforeMount () {
     this.getServices()

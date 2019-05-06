@@ -10,6 +10,9 @@
           <v-layout row>
             <h1>Your Reviews</h1>
           </v-layout>
+          <v-layout row>
+            <v-btn color="success" to="/review/create">Write Review</v-btn>
+          </v-layout>
           <v-container fluid grid-list-lg fill-height>
             <v-layout row wrap>
               <fragment v-for="booking in bookings" :key="booking.id">

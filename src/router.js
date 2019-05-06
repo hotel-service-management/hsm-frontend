@@ -75,6 +75,15 @@ let router = new Router({
       }
     },
     {
+      path: '/booking/receipt/:id',
+      name: 'bookingReceipt',
+      props: true,
+      component: () => import('./views/booking/Receipt.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: '/booking/detail/:id',
       name: 'bookingDetail',
       props: true,
@@ -119,7 +128,7 @@ let router = new Router({
       }
     },
     {
-      path: '/review/create/:id',
+      path: '/review/create',
       name: 'create_review',
       component: () => import('./views/review/Create.vue'),
       meta: {
