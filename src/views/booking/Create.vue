@@ -154,7 +154,7 @@ export default {
       return new Date(value).toISOString().substr(0, 10) >= new Date().toISOString().substr(0, 10)
     },
     deleteRoom (index) {
-      this.form.rooms = this.form.rooms.splice(index, 1)
+      this.form.rooms.splice(index, 1)
     }
   },
   watch: {
