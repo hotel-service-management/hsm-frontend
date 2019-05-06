@@ -10,9 +10,6 @@
           <v-layout row>
             <h1>Your Reviews</h1>
           </v-layout>
-          <v-layout row>
-            <v-btn color="success" to="/review/create">Write Review</v-btn>
-          </v-layout>
           <v-container fluid grid-list-lg fill-height>
             <v-layout row wrap>
               <fragment v-for="booking in bookings" :key="booking.id">
@@ -30,14 +27,27 @@
                     </v-card-title>
                   </v-card>
                 </v-flex>
-                <v-flex xs12 md6>
+                <v-flex xs12 md6 v-if="booking.review !== null">
                   <v-card color="blue" dark>
                     <v-card-title primary-title>
                       <div>
-                        <div class="headline">Nice Place!</div>
+                        <div class="headline">{{booking.review.title}}</div>
                         <span>
-                          Score : 9/10
-                          <br>Nice hotel location!
+                          Score : {{booking.review.score}}/10
+                          <br>
+                          {{booking.review.description}}
+                        </span>
+                      </div>
+                    </v-card-title>
+                  </v-card>
+                </v-flex>
+                <v-flex xs12 md6 v-else>
+                  <v-card color="blue" dark>
+                    <v-card-title primary-title>
+                      <div>
+                        <div class="headline">We are waiting feedback from you~!</div>
+                        <span>
+                          <v-btn color="success" :to="`/review/create/${booking.id}`">Write a review</v-btn>
                         </span>
                       </div>
                     </v-card-title>

@@ -128,8 +128,9 @@ let router = new Router({
       }
     },
     {
-      path: '/review/create',
+      path: '/review/create/:id',
       name: 'create_review',
+      props: true,
       component: () => import('./views/review/Create.vue'),
       meta: {
         requiresAuth: true
