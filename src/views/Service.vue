@@ -83,6 +83,7 @@ import NavBar from '@/components/NavBar.vue'
 import Loading from '@/components/Loading.vue'
 
 export default {
+  name: 'Service',
   components: {
     NavBar,
     Loading
@@ -94,7 +95,7 @@ export default {
   },
   computed: {
     ...mapState({
-      services: state => state.service.services
+      services: state => state.service.services.sort((a, b) => a.type < b.type)
     }),
     total () {
       let total = this.cart.reduce((a, b) => a + b.price, 0)
