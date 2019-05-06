@@ -63,7 +63,11 @@
                   </v-list>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="success">Order</v-btn>
+                    <v-btn
+                      color="success"
+                      :disabled="cart.length === 0"
+                      @click="doSubmitOrder"
+                    >Order</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-container>
@@ -78,12 +82,15 @@
 <script>
 import { mapState } from 'vuex'
 import { mapWaitingActions } from 'vue-wait'
+import router from '@/router'
+import authInstance from '@/util/auth'
 
 import NavBar from '@/components/NavBar.vue'
 import Loading from '@/components/Loading.vue'
 
 export default {
   name: 'Service',
+  props: ['id'],
   components: {
     NavBar,
     Loading
@@ -113,8 +120,15 @@ export default {
       }
     },
     deleteService (index) {
-      console.log(index)
       this.cart.splice(index, 1)
+    },
+    async doSubmitOrder () {
+      if (confirm('Are you sure to order?')) {
+        let order = await authInstance.post('/order/', { booking_detail_id: this.id,
+          service: this.cart.map(s => s.id) })
+        console.log(order)
+        // router.push(`/booking`)
+      }
     }
   },
   beforeMount () {

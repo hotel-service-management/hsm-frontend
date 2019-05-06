@@ -18,7 +18,10 @@ let router = new Router({
     {
       path: '/register',
       name: 'register',
-      component: () => import('./views/Register.vue')
+      component: () => import('./views/Register.vue'),
+      meta: {
+        skipAuth: true
+      }
     },
     {
       path: '/profile',
@@ -93,7 +96,7 @@ let router = new Router({
       path: '/service',
       name: 'service',
       props: true,
-      component: () => import('./views/Service.vue'),
+      component: () => import('./views/ServiceList.vue'),
       meta: {
         requiresAuth: true
       }
@@ -141,7 +144,7 @@ router.beforeEach((to, from, next) => {
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.skipAuth)) {
     if (store.getters['user/isLoggedIn']) {
-      next('/dashboard')
+      next('/booking')
       return
     }
     next()
