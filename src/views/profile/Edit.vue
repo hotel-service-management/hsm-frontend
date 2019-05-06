@@ -20,18 +20,21 @@
                       name="firstname"
                       label="Firstname"
                       type="text"
+                      v-model="form.first_name"
                     ></v-text-field>
                     <v-text-field
                       prepend-icon="fa-file-signature"
                       name="lastname"
                       label="Lastname"
                       type="text"
+                      v-model="form.last_name"
                     ></v-text-field>
                     <v-text-field
                       prepend-icon="fa-phone"
                       name="phone"
                       label="Phone Number"
                       type="text"
+                      v-model="form.phone_number"
                     ></v-text-field>
                     <v-textarea
                       prepend-icon="fa-address-card"
@@ -39,6 +42,7 @@
                       name="address"
                       label="Address"
                       rows="2"
+                      v-model="form.address"
                     ></v-textarea>
                   </v-form>
                 </v-card-text>
@@ -74,6 +78,11 @@ export default {
     NavBar,
     Loading
   },
+  data: () => {
+    return {
+      form: {}
+    }
+  },
   computed: {
     ...mapState({
       info: state => state.user.info
@@ -85,7 +94,13 @@ export default {
     })
   },
   beforeMount () {
-    this.doGetInfo()
+    this.doGetInfo().then(() => {
+      this.form = this.info
+
+      delete this.form.username
+      delete this.form.email
+      delete this.form.gender
+    })
   }
 }
 </script>

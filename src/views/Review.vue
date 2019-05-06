@@ -47,7 +47,9 @@
                       <div>
                         <div class="headline">We are waiting feedback from you~!</div>
                         <span>
-                          <v-btn color="success" :to="`/review/create/${booking.id}`">Write a review</v-btn>
+                          <v-btn color="success" :to="`/review/create/${booking.id}`">
+                            <v-icon right left>fa-edit</v-icon>Write a review
+                          </v-btn>
                         </span>
                       </div>
                     </v-card-title>
