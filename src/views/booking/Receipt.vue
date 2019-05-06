@@ -25,6 +25,21 @@
                     </v-list-tile-action>
                   </v-list-tile>
 
+                  <fragment v-for="d in booking.detail" :key="d.id">
+                    <fragment v-for="o in d.order_set" :key="o.id">
+                      <v-list-tile v-for="s in o.service" :key="s.id">
+                        <v-list-tile-content>
+                          <v-list-tile-title>{{s.title}}</v-list-tile-title>
+                          <v-list-tile-sub-title>{{s.type}}</v-list-tile-sub-title>
+                        </v-list-tile-content>
+
+                        <v-list-tile-action>
+                          <v-list-tile-action>{{s.price}} THB</v-list-tile-action>
+                        </v-list-tile-action>
+                      </v-list-tile>
+                    </fragment>
+                  </fragment>
+
                   <v-divider></v-divider>
 
                   <v-list-tile>
@@ -72,7 +87,12 @@ export default {
     }),
     total () {
       let booking = this.booking.detail || []
-      return booking.reduce((a, b) => a + (b.room.price * this.booking.night), 0)
+      booking = booking.reduce((a, b) => a + (b.room.price * this.booking.night), 0)
+
+      let service = this.booking.detail || []
+      service = service.reduce((a, b) => a + b.order_set.reduce((a, b) => a + b.total_price, 0), 0)
+
+      return booking + service
     }
   },
   methods: {
