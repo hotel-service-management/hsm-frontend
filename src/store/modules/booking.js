@@ -52,6 +52,15 @@ export default {
 
         router.push(`/booking/payment/${booking.id}`)
       }
+    },
+    async doPayment ({ commit, state }, payment) {
+      if (confirm('Are you sure to proceed?')) {
+        let pay = await authInstance.post(`/payment/`, { ...payment }).then(r => r.data)
+
+        if (!pay.error) {
+          router.push('/payment/completed')
+        }
+      }
     }
   }
 }

@@ -21,14 +21,16 @@
                   <v-container fluid style="background-color: white;">
                     <v-flex xs12 md12>
                       <v-select
-                        :items="['Cash', 'Credit Card']"
+                        :items="[{id: '01', title:'Cash'}, {id:'02', title:'Credit Card'}]"
+                        item-value="id"
+                        item-text="title"
                         label="Payment Method"
                         title="Payment Method"
                         v-model="form.type"
                         light
                       ></v-select>
                     </v-flex>
-                    <v-flex xs12 md12 v-if="form.type === 'Credit Card'">
+                    <v-flex xs12 md12 v-if="form.type === '02'">
                       <v-text-field
                         mask="credit-card"
                         label="Credit Card"
@@ -39,7 +41,10 @@
                   </v-container>
 
                   <v-layout row justify-center>
-                    <v-btn color="success">Pay</v-btn>
+                    <v-btn
+                      color="success"
+                      @click="doPayment({booking_id:id, payment_type: form.type, amount: total})"
+                    >Pay</v-btn>
                   </v-layout>
                 </v-card>
               </v-container>
@@ -83,7 +88,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import { mapWaitingActions } from 'vue-wait'
 
 import NavBar from '@/components/NavBar.vue'
@@ -98,7 +103,7 @@ export default {
   data: () => {
     return {
       form: {
-        type: 'Cash'
+        type: '01'
       }
     }
   },
@@ -114,6 +119,9 @@ export default {
   methods: {
     ...mapWaitingActions('booking', {
       getBooking: 'loading booking'
+    }),
+    ...mapActions({
+      doPayment: 'booking/doPayment'
     })
   },
   beforeMount () {

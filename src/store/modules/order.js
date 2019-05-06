@@ -1,6 +1,5 @@
 // import axios from 'axios'
 import authInstance from '@/util/auth'
-import router from '@/router'
 
 export default {
   namespaced: true,
