@@ -8,7 +8,7 @@
       <v-content>
         <v-container fluid>
           <v-layout row>
-            <h1>Pay Booking</h1>
+            <h1>Booking Payment</h1>
           </v-layout>
           <v-layout row wrap>
             <v-flex xs12 sm12 md6 pa-2>
@@ -24,10 +24,11 @@
                         :items="['Cash', 'Credit Card']"
                         label="Payment Method"
                         title="Payment Method"
+                        v-model="form.type"
                         light
                       ></v-select>
                     </v-flex>
-                    <v-flex xs12 md12>
+                    <v-flex xs12 md12 v-if="form.type === 'Credit Card'">
                       <v-text-field
                         mask="credit-card"
                         label="Credit Card"
@@ -47,27 +48,18 @@
               <v-container fluid>
                 <v-card color="blue" dark>
                   <v-card-title primary-title>
-                    <div class="headline">Order Summary</div>
+                    <div class="headline">Booking Summary</div>
                   </v-card-title>
                   <v-list light>
-                    <v-list-tile>
+                    <v-list-tile v-for="room in booking.detail" :key="room.id">
                       <v-list-tile-content>
-                        <v-list-tile-title>Room 3001</v-list-tile-title>
-                        <v-list-tile-sub-title>3 Nights</v-list-tile-sub-title>
+                        <v-list-tile-title>Room {{room.room.room_number}}</v-list-tile-title>
+                        <v-list-tile-sub-title>{{booking.night}} Nights</v-list-tile-sub-title>
                       </v-list-tile-content>
 
                       <v-list-tile-action>
-                        <v-list-tile-action>6000 THB</v-list-tile-action>
+                        <v-list-tile-action>{{room.room.price * booking.night}} THB</v-list-tile-action>
                       </v-list-tile-action>
-                    </v-list-tile>
-
-                    <v-list-tile>
-                      <v-list-tile-content>
-                        <v-list-tile-title>Room 2001</v-list-tile-title>
-                        <v-list-tile-sub-title>3 Nights</v-list-tile-sub-title>
-                      </v-list-tile-content>
-
-                      <v-list-tile-action>2400 THB</v-list-tile-action>
                     </v-list-tile>
 
                     <v-divider></v-divider>
@@ -77,7 +69,7 @@
                         <v-list-tile-title>Total</v-list-tile-title>
                       </v-list-tile-content>
 
-                      <v-list-tile-action>8400 THB</v-list-tile-action>
+                      <v-list-tile-action>{{total}} THB</v-list-tile-action>
                     </v-list-tile>
                   </v-list>
                 </v-card>
@@ -103,10 +95,21 @@ export default {
     NavBar,
     Loading
   },
+  data: () => {
+    return {
+      form: {
+        type: 'Cash'
+      }
+    }
+  },
   computed: {
     ...mapState({
       booking: state => state.booking.booking
-    })
+    }),
+    total () {
+      let booking = this.booking.detail || []
+      return booking.reduce((a, b) => a + (b.room.price * this.booking.night), 0)
+    }
   },
   methods: {
     ...mapWaitingActions('booking', {
