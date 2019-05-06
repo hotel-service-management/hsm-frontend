@@ -17,7 +17,8 @@ export default {
   },
   actions: {
     async doReview ({ commit, state }, id) {
-      let review = await authInstance.post('/review/', { ...state.review, booking_id: id }).then(r => r.data)
+      let review = await authInstance.post('/review/', { ...state.review, booking_id: id })
+      console.log(review)
 
       if (review.error) {
         commit('setError', {
