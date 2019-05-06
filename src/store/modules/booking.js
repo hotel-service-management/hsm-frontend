@@ -5,7 +5,8 @@ export default {
   namespaced: true,
   state: {
     bookings: [],
-    booking: {}
+    booking: {},
+    createForm: {}
   },
   mutations: {
     setBookings (state, payload) {
@@ -16,17 +17,19 @@ export default {
     }
   },
   actions: {
-    async getBookings ({ commit, dispatch }) {
+    async getBookings ({ commit }) {
       let booking = await authInstance.get('/booking/').then(r => r.data)
 
       commit('setBookings', booking)
     },
-    async getBooking ({ commit, dispatch }, id) {
+    async getBooking ({ commit }, id) {
       let booking = await authInstance.get(`/booking/${id}/`).then(r => r.data)
 
       commit('setBooking', booking)
-    }
+    },
+    async getAvailableRoom ({ commit }, startDate, endDate) {
 
+    }
   },
   getters: {
 

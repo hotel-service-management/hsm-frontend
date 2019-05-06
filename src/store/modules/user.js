@@ -18,10 +18,12 @@ export default {
     email: '',
     password: '',
     error: {
-      email: [],
-      password: []
+
     },
     info: {
+
+    },
+    register: {
 
     }
   },
@@ -44,6 +46,12 @@ export default {
     },
     setAccess (state, payload) {
       state.access = payload
+    },
+    setUser (state, payload) {
+      state.info = payload
+    },
+    setRegisterForm (state, payload) {
+      state.register = payload
     }
   },
   actions: {
@@ -54,12 +62,13 @@ export default {
         localStorage.setItem('refresh', token.refresh)
         commit('setToken', token)
 
-        let info = await authInstance.get('/auth/user')
-
+        let info = await authInstance.get('/auth/user').then(r => r.data)
         console.log(info)
 
         commit('setEmail', '')
         commit('setPassword', '')
+        commit('setError', {})
+        commit('setUser', { ...info.user })
 
         router.push('/booking')
       }
@@ -75,6 +84,25 @@ export default {
           email: token.detail,
           password: []
         })
+      }
+    },
+    async doRegister ({ commit, dispatch, state }) {
+      let user = await instance.post('/api/auth/register', { ...state.register })
+
+      if (user.error && user.errors) {
+        commit('setError', {
+          ...user.errors
+        })
+      }
+
+      if (!user.error) {
+        await commit('setEmail', state.register.email)
+        await commit('setPassword', state.register.password)
+
+        dispatch('doLogin')
+
+        commit('setRegisterForm', {})
+        commit('setError', {})
       }
     },
     async doLogout ({ commit }) {
