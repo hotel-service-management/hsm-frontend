@@ -136,6 +136,15 @@ let router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '/order/:id',
+      name: 'orderDerail',
+      props: true,
+      component: () => import('./views/Order.vue'),
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 })

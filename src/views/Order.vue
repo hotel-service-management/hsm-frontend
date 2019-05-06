@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <nav-bar/>
-    <v-wait for="loading booking">
+    <v-wait for="loading order">
       <template slot="waiting">
         <loading/>
       </template>
@@ -11,17 +11,17 @@
             <v-flex md6 xs12>
               <v-card color="blue" dark>
                 <v-card-title primary-title>
-                  <div class="headline">Booking #{{id}} Receipt ({{booking.night}} Nights)</div>
+                  <div class="headline">Order #{{id}} Receipt</div>
                 </v-card-title>
                 <v-list light>
-                  <v-list-tile v-for="d in booking.detail" :key="d.id">
+                  <v-list-tile v-for="s in order.service" :key="s.id">
                     <v-list-tile-content>
-                      <v-list-tile-title>Room {{d.room.room_number}}</v-list-tile-title>
-                      <v-list-tile-sub-title>{{d.room.type}}</v-list-tile-sub-title>
+                      <v-list-tile-title>{{s.title}}</v-list-tile-title>
+                      <v-list-tile-sub-title>{{s.type}}</v-list-tile-sub-title>
                     </v-list-tile-content>
 
                     <v-list-tile-action>
-                      <v-list-tile-action>{{d.room.price}} THB</v-list-tile-action>
+                      <v-list-tile-action>{{s.price}} THB</v-list-tile-action>
                     </v-list-tile-action>
                   </v-list-tile>
 
@@ -32,7 +32,7 @@
                       <v-list-tile-title>Total</v-list-tile-title>
                     </v-list-tile-content>
 
-                    <v-list-tile-action>{{total}} THB</v-list-tile-action>
+                    <v-list-tile-action>{{order.service_cost}} THB</v-list-tile-action>
                   </v-list-tile>
                 </v-list>
                 <v-card-actions>
@@ -55,7 +55,7 @@ import NavBar from '@/components/NavBar.vue'
 import Loading from '@/components/Loading.vue'
 
 export default {
-  name: 'Receipt',
+  name: 'OrderReceipt',
   props: ['id'],
   components: {
     NavBar,
@@ -68,20 +68,16 @@ export default {
   },
   computed: {
     ...mapState({
-      booking: state => state.booking.booking
-    }),
-    total () {
-      let booking = this.booking.detail || []
-      return booking.reduce((a, b) => a + (b.room.price * this.booking.night), 0)
-    }
+      order: state => state.order.order
+    })
   },
   methods: {
-    ...mapWaitingActions('booking', {
-      getBooking: 'loading booking'
+    ...mapWaitingActions('order', {
+      getOrder: 'loading order'
     })
   },
   beforeMount () {
-    this.getBooking(this.id)
+    this.getOrder(this.id)
   }
 }
 </script>
