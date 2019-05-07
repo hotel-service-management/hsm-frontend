@@ -11,6 +11,9 @@
             <h1>Create Booking</h1>
           </v-layout>
           <v-layout row wrap>
+            <v-flex xs12 sm12 md12 pa-2 v-if="error.error">
+              <h2 v-for="e in error.error" :key="e" color="red">{{e}}</h2>
+            </v-flex>
             <v-flex xs12 sm12 md6 pa-2>
               <v-menu
                 :close-on-content-click="false"
@@ -131,10 +134,11 @@ export default {
   },
   computed: {
     ...mapState({
-      availableRoom: state => state.booking.availableRoom
+      availableRoom: state => state.booking.availableRoom,
+      error: state => state.booking.error
     }),
     disabled () {
-      return !this.form.room.every(r => r !== null) || this.form.room.length === 0
+      return !this.form.room.every(r => r !== null) || this.form.room.length === 0 || new Date(this.form.start_date).toISOString().substr(0, 10) >= new Date(this.form.end_date).toISOString().substr(0, 10)
     }
   },
   methods: {

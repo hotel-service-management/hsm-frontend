@@ -8,7 +8,8 @@ export default {
     bookings: [],
     booking: {},
     createForm: {},
-    availableRoom: []
+    availableRoom: [],
+    error: {}
   },
   mutations: {
     setBookings (state, payload) {
@@ -22,6 +23,9 @@ export default {
     },
     setAvailableRooms (state, payload) {
       state.availableRoom = payload
+    },
+    setError (state, payload) {
+      state.error = payload
     }
   },
   actions: {
@@ -46,11 +50,17 @@ export default {
     async doCreateBooking ({ commit, state }) {
       if (confirm('Are you sure to book?')) {
         let info = await authInstance.get('/auth/user').then(r => r.data)
-        console.log(info)
 
         let booking = await authInstance.post(`/booking/`, { ...state.createForm, owner: info.user.id }).then(r => r.data)
 
-        router.push(`/booking/payment/${booking.id}`)
+        if (booking.error) {
+          commit('setError', booking.error)
+        }
+
+        if (!booking.error) {
+          commit('setError', {})
+          router.push(`/booking/payment/${booking.id}`)
+        }
       }
     },
     async doPayment ({ commit, state }, payment) {
