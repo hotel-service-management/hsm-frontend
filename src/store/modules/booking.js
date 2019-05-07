@@ -43,7 +43,7 @@ export default {
       const { startDate, endDate } = date
       let rooms = await authInstance.get(`/booking/room/?start_date=${startDate}&&end_date=${endDate}`).then(r => r.data)
 
-      rooms = rooms.map(r => ({ ...r, title: `(${r.type.type}) ${r.room_number} - ${r.price} THB` }))
+      rooms = rooms.map(r => ({ ...r, title: `(${r.type.title}) ${r.room_number} - ${r.price} THB` }))
 
       commit('setAvailableRooms', rooms)
     },
