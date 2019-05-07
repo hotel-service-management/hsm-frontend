@@ -35,7 +35,4 @@ export default {
   color: #000;
   text-decoration: none;
 }
-
-#nav-head {
-}
 </style>
