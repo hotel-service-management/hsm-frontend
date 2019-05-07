@@ -60,6 +60,7 @@
                   ></v-text-field>
                   <v-text-field
                     prepend-icon="fa-phone"
+                    mask="phone"
                     name="phone"
                     label="Phone Number"
                     type="text"

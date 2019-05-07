@@ -34,6 +34,7 @@
                     <v-text-field
                       prepend-icon="fa-phone"
                       name="phone"
+                      mask="phone"
                       label="Phone Number"
                       type="text"
                       v-model="form.phone_number"
