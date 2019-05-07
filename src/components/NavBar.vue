@@ -4,7 +4,9 @@
 
     <v-toolbar app color="#77C6FF" :fixed="fixed" :clipped-left="clippedLeft">
       <v-toolbar-side-icon @click.stop="drawerOpen(!open)"></v-toolbar-side-icon>
-      <v-toolbar-title>Hotel Service Management</v-toolbar-title>
+      <v-toolbar-title>
+        <router-link to="/booking" id="nav-head">Hotel Service Management</router-link>
+      </v-toolbar-title>
     </v-toolbar>
   </fragment>
 </template>
@@ -28,5 +30,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+#nav-head {
+  color: #000;
+  text-decoration: none;
+}
+
+#nav-head {
+}
 </style>
