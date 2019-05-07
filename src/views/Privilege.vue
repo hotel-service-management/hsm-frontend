@@ -8,7 +8,7 @@
       <v-content>
         <v-container fluid>
           <v-layout row>
-            <h1>Privilege(s)</h1>
+            <h1>Privileges</h1>
           </v-layout>
           <v-container fluid grid-list-lg>
             <v-flex xs12 lg12>

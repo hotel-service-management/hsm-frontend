@@ -16,7 +16,7 @@
                   v-show="bookings.length == 0"
                 >Bookings are required to write a review.</span>
 
-                <div class="title mb-3">Create your first Booking Now!!</div>
+                <div class="title mb-3">Create your first booking now!</div>
 
                 <v-btn color="info" to="/booking/create">New Booking</v-btn>
               </v-flex>
@@ -36,7 +36,7 @@
                       <div>
                         <div class="headline">Booking #{{ booking.id }}</div>
                         <span>
-                          Date {{ booking.start_date }} to {{ booking.end_date }}
+                          Date : {{ booking.start_date }} to {{ booking.end_date }}
                           <br>
                           Total Room : {{ booking.detail.length }}
                         </span>
@@ -55,7 +55,7 @@
                           {{booking.review.description}}
                           <br>
                           <v-btn color="success" :to="`/review/edit/${booking.id}`">
-                            <v-icon right left>fa-edit</v-icon>Edit a review
+                            <v-icon right left>fa-edit</v-icon>Edit review
                           </v-btn>
                         </span>
                       </div>
@@ -66,7 +66,7 @@
                   <v-card color="blue" dark>
                     <v-card-title primary-title>
                       <div>
-                        <div class="headline">We are waiting feedback from you~!</div>
+                        <div class="headline">We are waiting a feedback from you!</div>
                         <span>
                           <v-btn color="success" :to="`/review/create/${booking.id}`">
                             <v-icon right left>fa-edit</v-icon>Write a review

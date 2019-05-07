@@ -8,12 +8,12 @@
           <v-flex xs12 sm8 md4>
             <v-card class="elevation-12">
               <v-toolbar dark color="primary">
-                <v-toolbar-title>Payment Completed, Thank You!</v-toolbar-title>
+                <v-toolbar-title>Payment completed, thank you!</v-toolbar-title>
               </v-toolbar>
 
               <v-container
                 text-xs-center
-              >Thank you for choosing our hotel~ Feel free to leave some comment~</v-container>
+              >Thank you for booking with us! Feel free to leave some comments.</v-container>
               <v-card-actions>
                 <v-layout justify-center>
                   <v-btn color="success" to="/booking">
