@@ -138,6 +138,15 @@ let router = new Router({
       }
     },
     {
+      path: '/review/edit/:id',
+      name: 'edit_review',
+      props: true,
+      component: () => import('./views/review/Edit.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: '/order/:id',
       name: 'orderDerail',
       props: true,

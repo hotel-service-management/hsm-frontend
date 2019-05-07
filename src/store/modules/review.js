@@ -18,7 +18,21 @@ export default {
   actions: {
     async doReview ({ commit, state }, id) {
       let review = await authInstance.post('/review/', { ...state.review, booking_id: id }).then(r => r.data)
-      console.log(review)
+
+      if (review.error) {
+        commit('setError', {
+          ...review.error
+        })
+      }
+
+      if (!review.error) {
+        commit('setReviewForm', {})
+        commit('setError', {})
+        router.push('/review')
+      }
+    },
+    async doEditReview ({ commit, state }, id) {
+      let review = await authInstance.patch(`/review/${id}/`, { ...state.review }).then(r => r.data)
 
       if (review.error) {
         commit('setError', {
