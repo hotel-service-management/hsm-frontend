@@ -67,6 +67,15 @@ let router = new Router({
       }
     },
     {
+      path: '/booking/checkout/completed',
+      name: 'bookingCheckoutCompleted',
+      props: true,
+      component: () => import('./views/checkout/Completed.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: '/booking/checkout/:id',
       name: 'bookingCheckout',
       props: true,
