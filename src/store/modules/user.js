@@ -25,6 +25,9 @@ export default {
     },
     register: {
 
+    },
+    update: {
+
     }
   },
   mutations: {
@@ -52,6 +55,9 @@ export default {
     },
     setRegisterForm (state, payload) {
       state.register = payload
+    },
+    setUpdateForm (state, payload) {
+      state.update = payload
     }
   },
   actions: {
@@ -120,6 +126,17 @@ export default {
     async doGetInfo ({ commit }) {
       let info = await authInstance.get('/auth/user').then(r => r.data)
       commit('setUser', { ...info.user })
+    },
+    async doUpdateProfile ({ state, commit }) {
+      let user = await authInstance.patch('/auth/user', { ...state.update }).then(r => r.data)
+
+      if (user.errors) {
+        commit('setError', user.errors)
+      }
+
+      if (!user.errors) {
+        router.push('/profile')
+      }
     }
   },
   getters: {

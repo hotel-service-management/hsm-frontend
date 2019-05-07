@@ -16,38 +16,21 @@
                 <v-card-text>
                   <v-form>
                     <v-text-field
-                      prepend-icon="fa-file-signature"
-                      name="firstname"
-                      label="Firstname"
-                      type="text"
-                      v-model="form.first_name"
-                      :error-messages="error.first_name"
+                      prepend-icon="fa-lock"
+                      name="password"
+                      label="Password"
+                      type="password"
+                      v-model="form.password"
+                      :error-messages="error.password || match"
                     ></v-text-field>
                     <v-text-field
-                      prepend-icon="fa-file-signature"
-                      name="lastname"
-                      label="Lastname"
-                      type="text"
-                      v-model="form.last_name"
-                      :error-messages="error.last_name"
+                      prepend-icon="fa-lock"
+                      name="cpassword"
+                      label="Confirm Password"
+                      type="password"
+                      v-model="form.cpassword"
+                      :error-messages="match"
                     ></v-text-field>
-                    <v-text-field
-                      prepend-icon="fa-phone"
-                      name="phone"
-                      label="Phone Number"
-                      type="text"
-                      v-model="form.phone_number"
-                      :error-messages="error.phone_number"
-                    ></v-text-field>
-                    <v-textarea
-                      prepend-icon="fa-address-card"
-                      auto-grow
-                      name="address"
-                      label="Address"
-                      rows="2"
-                      v-model="form.address"
-                      :error-messages="error.address"
-                    ></v-textarea>
                   </v-form>
                 </v-card-text>
                 <v-card-actions>
@@ -55,7 +38,7 @@
                     <v-icon left dark>fa-times</v-icon>Cancel
                   </v-btn>
                   <v-spacer></v-spacer>
-                  <v-btn color="success" @click="doUpdateProfile">
+                  <v-btn color="success" @click="doUpdateProfile" :disabled="disable">
                     Save
                     <v-icon right dark>fa-edit</v-icon>
                   </v-btn>
@@ -91,7 +74,13 @@ export default {
     ...mapState({
       info: state => state.user.info,
       error: state => state.user.error
-    })
+    }),
+    match () {
+      return this.form.password !== this.form.cpassword ? ['Password not match'] : []
+    },
+    disable () {
+      return this.form.password !== this.form.cpassword || (this.form.password === '' && this.form.cpassword === '')
+    }
   },
   methods: {
     ...mapWaitingActions('user', {
@@ -104,21 +93,13 @@ export default {
       doUpdateProfile: 'user/doUpdateProfile'
     })
   },
-  beforeMount () {
-    this.doGetInfo().then(() => {
-      this.form = this.info
-
-      delete this.form.username
-      delete this.form.email
-      delete this.form.gender
-    })
-  },
   watch: {
     form: {
       handler (v) {
         this.setUpdateForm(v)
       },
-      deep: true }
+      deep: true
+    }
   }
 }
 </script>
