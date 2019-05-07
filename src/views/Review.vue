@@ -10,7 +10,6 @@
           <v-container fill-height>
             <v-layout align-center>
               <v-flex>
-
                 <h3 class style="font-size: 8em; color:#43A3F5">Sorry</h3>
                 <span
                   class="subheading"
@@ -75,7 +74,6 @@
                     </v-card-title>
                   </v-card>
                 </v-flex>
-                <v-divider class="my-3"></v-divider>
               </fragment>
             </v-layout>
           </v-container>
