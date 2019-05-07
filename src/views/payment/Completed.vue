@@ -14,10 +14,10 @@
                 text-xs-center
                 style="color:red; font-size: 2em"
               >Please check-in before 2 PM.</v-container>
-              <v-container
-                text-xs-center
-              >Indentification documents are required in the check-in process.<br>
-              Otherwise, check-in will be void.</v-container>
+              <v-container text-xs-center>
+                Indentification documents are required in the check-in process.
+                <br>Otherwise, check-in will be void.
+              </v-container>
               <v-card-actions>
                 <v-layout justify-center>
                   <v-btn color="success" to="/booking">
@@ -34,11 +34,11 @@
 </template>
 
 <script>
-import NavBar from "@/components/NavBar.vue";
+import NavBar from '@/components/NavBar.vue'
 
 export default {
   components: {
     NavBar
   }
-};
+}
 </script>

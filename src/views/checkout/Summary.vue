@@ -19,25 +19,33 @@
                   </v-card-title>
 
                   <v-container fluid style="background-color: white;">
-                    <v-flex xs12 md12>
-                      <v-select
-                        :items="[{id: '01', title:'Cash'}, {id:'02', title:'Credit Card'}]"
-                        item-value="id"
-                        item-text="title"
-                        label="Payment Method"
-                        title="Payment Method"
-                        v-model="form.type"
-                        light
-                      ></v-select>
-                    </v-flex>
-                    <v-flex xs12 md12 v-if="form.type === '02'">
-                      <v-text-field
-                        mask="credit-card"
-                        label="Credit Card"
-                        title="Credit Card"
-                        light
-                      />
-                    </v-flex>
+                    <v-layout row wrap>
+                      <v-flex xs12 md12>
+                        <v-select
+                          :items="[{id: '01', title:'Cash'}, {id:'02', title:'Credit Card'}]"
+                          item-value="id"
+                          item-text="title"
+                          label="Payment Method"
+                          title="Payment Method"
+                          v-model="form.type"
+                          light
+                        ></v-select>
+                      </v-flex>
+                      <v-flex xs12 md12 v-if="form.type === '02'">
+                        <v-text-field
+                          mask="credit-card"
+                          label="Credit Card"
+                          title="Credit Card"
+                          light
+                        />
+                      </v-flex>
+                      <v-flex xs6 md12 v-if="form.type === '02'">
+                        <v-text-field label="CVV" title="CVV" light/>
+                      </v-flex>
+                      <v-flex xs6 md12 v-if="form.type === '02'">
+                        <v-text-field mask="date" label="MM/YY" title="VALID THRU" light/>
+                      </v-flex>
+                    </v-layout>
                   </v-container>
 
                   <v-layout row justify-center>
