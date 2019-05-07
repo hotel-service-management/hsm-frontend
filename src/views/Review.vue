@@ -36,6 +36,10 @@
                           Score : {{booking.review.score}}/10
                           <br>
                           {{booking.review.description}}
+                          <br>
+                          <v-btn color="success" :to="`/review/edit/${booking.id}`">
+                            <v-icon right left>fa-edit</v-icon>Edit a review
+                          </v-btn>
                         </span>
                       </div>
                     </v-card-title>
