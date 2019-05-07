@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-content>
-      <v-container fluid fill-height>
+      <v-container fluid fill-height id="register-page">
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md4>
             <v-card class="elevation-12">
@@ -32,7 +32,15 @@
                     label="Password"
                     type="password"
                     v-model="register.password"
-                    :error-messages="error.password"
+                    :error-messages="error.password || confirmPasswordError"
+                  />
+                  <v-text-field
+                    prepend-icon="fa-lock"
+                    name="password"
+                    label="Confirm Password"
+                    type="password"
+                    v-model="register.cpassword"
+                    :error-messages="error.cpassword || confirmPasswordError"
                   />
                   <v-text-field
                     prepend-icon="fa-file-signature"
@@ -73,7 +81,7 @@
                     <v-icon left dark>fa-long-arrow-alt-left</v-icon>Back
                   </v-btn>
                   <v-spacer></v-spacer>
-                  <v-btn color="success" @click="doRegister">
+                  <v-btn color="success" @click="doRegister" :disabled="confirmPassword">
                     Register
                     <v-icon right dark>fa-check</v-icon>
                   </v-btn>
@@ -98,6 +106,7 @@ export default {
         username: '',
         email: '',
         password: '',
+        cpassword: '',
         first_name: '',
         last_name: '',
         phone: '',
@@ -108,7 +117,13 @@ export default {
   computed: {
     ...mapState({
       'error': state => state.user.error
-    })
+    }),
+    confirmPassword () {
+      return this.register.password !== this.register.cpassword
+    },
+    confirmPasswordError () {
+      return this.confirmPassword ? ['Password Not Match!'] : []
+    }
   },
   methods: {
     ...mapActions({
@@ -122,9 +137,18 @@ export default {
       },
       deep: true
     }
+  },
+  beforeMount () {
+    store.commit('user/setError', {})
+  },
+  beforeDestroy () {
+    store.commit('user/setError', {})
   }
 }
 </script>
 
 <style>
+#register-page {
+  background-image: url("../assets/background.jpg");
+}
 </style>

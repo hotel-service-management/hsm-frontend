@@ -63,7 +63,7 @@ export default {
         }
       }
     },
-    async doPayment ({ commit, state }, payment) {
+    async doPayment ({ dispatch }, payment) {
       if (confirm('Are you sure to proceed?')) {
         let pay = await authInstance.post(`/payment/`, { ...payment }).then(r => r.data)
 
@@ -71,6 +71,19 @@ export default {
           router.push('/payment/completed')
         }
       }
+    },
+    async doPaymentCheckout ({ dispatch }, payment) {
+      if (confirm('Are you sure to proceed?')) {
+        let pay = await authInstance.post(`/payment/`, { ...payment }).then(r => r.data)
+
+        if (!pay.error) {
+          dispatch('doCheckout', payment.booking_id)
+          router.push('/booking/checkout/completed')
+        }
+      }
+    },
+    async doCheckout ({ commit, state }, id) {
+      await authInstance.patch(`/booking/${id}/`, { status_id: 2, check_out: new Date().toISOString() }).then(r => r.data)
     }
   }
 }
