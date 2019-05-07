@@ -17,7 +17,7 @@
                   <v-list-tile v-for="d in booking.detail" :key="d.id">
                     <v-list-tile-content>
                       <v-list-tile-title>Room {{d.room.room_number}}</v-list-tile-title>
-                      <v-list-tile-sub-title>{{d.room.type}}</v-list-tile-sub-title>
+                      <v-list-tile-sub-title>{{d.room.type.title}}</v-list-tile-sub-title>
                     </v-list-tile-content>
 
                     <v-list-tile-action>
@@ -30,7 +30,7 @@
                       <v-list-tile v-for="s in o.service" :key="s.id">
                         <v-list-tile-content>
                           <v-list-tile-title>{{s.title}}</v-list-tile-title>
-                          <v-list-tile-sub-title>{{s.type}}</v-list-tile-sub-title>
+                          <v-list-tile-sub-title>{{s.type.title}}</v-list-tile-sub-title>
                         </v-list-tile-content>
 
                         <v-list-tile-action>

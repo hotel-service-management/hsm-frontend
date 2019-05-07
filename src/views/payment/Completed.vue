@@ -10,12 +10,13 @@
               <v-toolbar dark color="primary">
                 <v-toolbar-title>Payment Completed, Thank You!</v-toolbar-title>
               </v-toolbar>
-              <v-container text-xs-center style="color:red; font-size: 2em">
-                    Please Check-in before 14:00 
-              </v-container>
-              <v-container text-xs-center>
-                    Bring Your indentication documentation when check in otherwise check-in will be viod
-              </v-container>
+              <v-container
+                text-xs-center
+                style="color:red; font-size: 2em"
+              >Please Check-in before 14:00</v-container>
+              <v-container
+                text-xs-center
+              >Bring Your indentication documentation when check in otherwise check-in will be void</v-container>
               <v-card-actions>
                 <v-layout justify-center>
                   <v-btn color="success" to="/booking">
