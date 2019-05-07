@@ -6,11 +6,30 @@
         <loading/>
       </template>
       <v-content>
-        <v-container fluid>
+      <v-container fill-height v-if="bookings.length == 0">
+          <v-container fill-height>
+            <v-layout align-center>
+              <v-flex>
+                <h3 class="" style="font-size: 8em; color:#43A3F5">Oh ohh..</h3>
+                <span
+                  class="subheading"
+                  v-show="bookings.length == 0"
+                >
+                  There's no booking yet so you can't review us, but don't worry
+                </span>
+
+                <div class="title mb-3">Create your first Booking Now!!</div>
+
+                <v-btn color="info" to="/booking/create">New Booking</v-btn>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-container>
+        <v-container fluid v-show="bookings.length > 0">
           <v-layout row>
             <h1>Your Reviews</h1>
           </v-layout>
-          <v-container fluid grid-list-lg fill-height>
+          <v-container fluid grid-list-lg fill-height v-show="bookings.length > 0">
             <v-layout row wrap>
               <fragment v-for="booking in bookings" :key="booking.id">
                 <v-flex xs12 md4>

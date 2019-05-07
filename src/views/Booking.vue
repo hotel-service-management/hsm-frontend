@@ -5,36 +5,32 @@
       <template slot="waiting">
         <loading/>
       </template>
-      <v-content>
+      <v-content id= "booking">
         <v-container fluid>
-          
-          <v-jumbotron>
+          <v-container fill-height>
             <v-container fill-height>
               <v-layout align-center>
                 <v-flex>
-                  <h3 class="display-3">Welcome to Oursite</h3>
-
+                  <h3 class="" style="color: #43A3F5;font-size : 7em; ">Welcome</h3>
                   <span
                     class="subheading"
                     v-show="bookings.length == 0"
                   >
                     It's seem Like you didn't have any booking yet.
                   </span>
-                  <v-divider class="my-3"></v-divider>
-
-                  <div class="title mb-3">Create your first Booking Now!!</div>
-
-                  <v-btn color="success" to="/booking/create">New Booking</v-btn>
+                  <!-- <v-divider class="my-3"></v-divider> -->
+                  <div class="title mb-3" style="font-size : 10em;">Create your first Booking Now!!</div>
+                  <v-btn color="info" to="/booking/create">New Booking</v-btn>
                 </v-flex>
               </v-layout>
             </v-container>
-          </v-jumbotron>
+          </v-container >
 
           <v-layout row v-show="bookings.length != 0">
             <h1>Your Bookings</h1>
           </v-layout>
           <v-layout row v-show="bookings.length != 0">
-            <v-btn color="success" to="/booking/create">New Booking</v-btn>
+            <v-btn color="info" to="/booking/create">New Booking</v-btn>
           </v-layout>
           <v-container fluid grid-list-lg fill-height>
             <v-layout row wrap>
@@ -93,3 +89,13 @@ export default {
   }
 };
 </script>
+
+<style scope>
+#booking {
+  background-image: url("../assets/background.jpg");
+  height: 100vh;
+}
+.subheading {
+  font-size : 3em;
+}
+</style>
