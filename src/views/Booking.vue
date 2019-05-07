@@ -7,10 +7,33 @@
       </template>
       <v-content>
         <v-container fluid>
-          <v-layout row>
+          
+          <v-jumbotron>
+            <v-container fill-height>
+              <v-layout align-center>
+                <v-flex>
+                  <h3 class="display-3">Welcome to Oursite</h3>
+
+                  <span
+                    class="subheading"
+                    v-show="bookings.length == 0"
+                  >
+                    It's seem Like you didn't have any booking yet.
+                  </span>
+                  <v-divider class="my-3"></v-divider>
+
+                  <div class="title mb-3">Create your first Booking Now!!</div>
+
+                  <v-btn color="success" to="/booking/create">New Booking</v-btn>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-jumbotron>
+
+          <v-layout row v-show="bookings.length != 0">
             <h1>Your Bookings</h1>
           </v-layout>
-          <v-layout row>
+          <v-layout row v-show="bookings.length != 0">
             <v-btn color="success" to="/booking/create">New Booking</v-btn>
           </v-layout>
           <v-container fluid grid-list-lg fill-height>
@@ -43,11 +66,11 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import { mapWaitingActions } from 'vue-wait'
+import { mapState } from "vuex";
+import { mapWaitingActions } from "vue-wait";
 
-import NavBar from '@/components/NavBar.vue'
-import Loading from '@/components/Loading.vue'
+import NavBar from "@/components/NavBar.vue";
+import Loading from "@/components/Loading.vue";
 
 export default {
   components: {
@@ -57,15 +80,16 @@ export default {
   computed: {
     ...mapState({
       bookings: state => state.booking.bookings
-    })
+    }),
+    
   },
   methods: {
-    ...mapWaitingActions('booking', {
-      getBookings: 'loading bookings'
+    ...mapWaitingActions("booking", {
+      getBookings: "loading bookings"
     })
   },
-  beforeMount () {
-    this.getBookings()
+  beforeMount() {
+    this.getBookings();
   }
-}
+};
 </script>
