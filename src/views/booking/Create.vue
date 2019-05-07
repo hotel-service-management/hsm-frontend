@@ -10,6 +10,10 @@
           <v-layout row>
             <h1>Create Booking</h1>
           </v-layout>
+          <!-- Error -->
+          <v-layout row class="red--text" v-if="duplicated">You cannot book duplicated room</v-layout>
+          <v-layout row class="red--text" v-if="dateChecker">Check-out date must be after Check-in</v-layout>
+          <!-- End Error -->
           <v-layout row wrap>
             <v-flex xs12 sm12 md12 pa-2 v-if="error.error">
               <h2 v-for="e in error.error" :key="e" color="red">{{e}}</h2>
@@ -137,8 +141,14 @@ export default {
       availableRoom: state => state.booking.availableRoom,
       error: state => state.booking.error
     }),
+    duplicated () {
+      return (new Set(this.form.room)).size !== this.form.room.length
+    },
+    dateChecker () {
+      return new Date(this.form.start_date).toISOString().substr(0, 10) >= new Date(this.form.end_date).toISOString().substr(0, 10)
+    },
     disabled () {
-      return !this.form.room.every(r => r !== null) || this.form.room.length === 0 || new Date(this.form.start_date).toISOString().substr(0, 10) >= new Date(this.form.end_date).toISOString().substr(0, 10)
+      return !this.form.room.every(r => r !== null) || this.form.room.length === 0 || this.dateChecker || this.duplicated
     }
   },
   methods: {
