@@ -15,9 +15,9 @@
                   <span
                     class="subheading"
                     v-show="bookings.length == 0"
-                  >It's seem Like you didn't have any booking yet.</span>
+                  >It seems like you do not have any booking yet.</span>
                   <!-- <v-divider class="my-3"></v-divider> -->
-                  <div class="title mb-3" style="font-size : 10em;">Create your first Booking Now!!</div>
+                  <div class="title mb-3" style="font-size : 10em;">Create your first booking now!</div>
                   <v-btn color="info" to="/booking/create">New Booking</v-btn>
                 </v-flex>
               </v-layout>
