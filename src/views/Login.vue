@@ -95,6 +95,12 @@ export default {
     ...mapActions({
       doLogin: 'user/doLogin'
     })
+  },
+  beforeMount () {
+    store.commit('user/setError', {})
+  },
+  beforeDestroy () {
+    store.commit('user/setError', {})
   }
 }
 </script>

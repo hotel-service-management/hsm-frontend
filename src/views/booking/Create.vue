@@ -11,8 +11,16 @@
             <h1>Create Booking</h1>
           </v-layout>
           <!-- Error -->
-          <v-layout row class="red--text" v-if="duplicated">You cannot book duplicated room</v-layout>
-          <v-layout row class="red--text" v-if="dateChecker">Check-out date must be after Check-in</v-layout>
+          <v-layout
+            row
+            class="red--text font-weight-bold headline"
+            v-if="duplicated"
+          >You cannot book duplicated room</v-layout>
+          <v-layout
+            row
+            class="red--text font-weight-bold headline"
+            v-if="dateChecker"
+          >Check-out date must be after Check-in</v-layout>
           <!-- End Error -->
           <v-layout row wrap>
             <v-flex xs12 sm12 md12 pa-2 v-if="error.error">
