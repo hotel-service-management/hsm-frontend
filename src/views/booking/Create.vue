@@ -7,20 +7,23 @@
       </template>
       <v-content>
         <v-container fluid>
+          <v-alert
+            :value="duplicated"
+            color="error"
+            icon="warning"
+            outline
+          >You cannot book duplicated room</v-alert>
+          <v-alert
+            row
+            :value="dateChecker"
+            color="error"
+            icon="warning"
+            outline
+          >Check-in date must come before check-out date.</v-alert>
           <v-layout row>
             <h1>Create Booking</h1>
           </v-layout>
-          <!-- Error -->
-          <v-layout
-            row
-            class="red--text font-weight-bold headline"
-            v-if="duplicated"
-          >You cannot book duplicated room.</v-layout>
-          <v-layout
-            row
-            class="red--text font-weight-bold headline"
-            v-if="dateChecker"
-          >Check-in date must come before check-out date.</v-layout>
+
           <!-- End Error -->
           <v-layout row wrap>
             <v-flex xs12 sm12 md12 pa-2 v-if="error.error">
@@ -127,6 +130,7 @@ import { mapWaitingActions } from 'vue-wait'
 
 import NavBar from '@/components/NavBar.vue'
 import Loading from '@/components/Loading.vue'
+
 
 export default {
   components: {

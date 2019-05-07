@@ -31,7 +31,18 @@ let router = new Router({
     {
       path: '/profile/edit',
       name: 'profileEdit',
-      component: () => import('./views/profile/Edit.vue')
+      component: () => import('./views/profile/Edit.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/profile/password',
+      name: 'profileEditPassword',
+      component: () => import('./views/profile/Password.vue'),
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/dashboard',

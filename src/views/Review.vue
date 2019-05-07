@@ -10,14 +10,13 @@
           <v-container fill-height>
             <v-layout align-center>
               <v-flex>
+
                 <h3 class style="font-size: 8em; color:#43A3F5">Sorry</h3>
                 <span
                   class="subheading"
                   v-show="bookings.length == 0"
                 >Bookings are required to write a review.</span>
-
                 <div class="title mb-3">Create your first booking now!</div>
-
                 <v-btn color="info" to="/booking/create">New Booking</v-btn>
               </v-flex>
             </v-layout>
@@ -76,6 +75,7 @@
                     </v-card-title>
                   </v-card>
                 </v-flex>
+                <v-divider class="my-3"></v-divider>
               </fragment>
             </v-layout>
           </v-container>

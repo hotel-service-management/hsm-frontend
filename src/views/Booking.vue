@@ -11,13 +11,14 @@
             <v-container fill-height>
               <v-layout align-center>
                 <v-flex>
-                  <h3 class style="color: #43A3F5;font-size : 7em; ">Welcome</h3>
+                  <h3 class style="color: #43A3F5;font-size : 6em; ">Welcome</h3>
                   <span
                     class="subheading"
                     v-show="bookings.length == 0"
                   >Seems like you do not have any booking yet.</span>
                   <!-- <v-divider class="my-3"></v-divider> -->
-                  <div class="title mb-3" style="font-size : 10em;">Create a booking now!</div>
+                  <div class="title mb-3" style="font-size : 10em;" v-if="bookings.length == 0">Create your first booking now!</div>
+                  <div class="title mb-3" style="font-size : 10em;" v-else>Create your booking now!</div>
                   <v-btn color="info" to="/booking/create">New Booking</v-btn>
                 </v-flex>
               </v-layout>
@@ -96,6 +97,9 @@ export default {
 #booking {
   background-image: url("../assets/background.jpg");
   height: 100vh;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  position: center;
 }
 .subheading {
   font-size: 3em;

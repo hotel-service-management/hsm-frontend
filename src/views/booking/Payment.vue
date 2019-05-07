@@ -38,6 +38,22 @@
                         light
                       />
                     </v-flex>
+                    <v-flex xs6 md6 v-if="form.type === '02'">
+                      <v-text-field
+                        mask="date"
+                        label="MM/YY"
+                        title="VALID THRU"
+                        light
+                      />
+                    </v-flex>
+                    <v-flex xs6 md6 v-if="form.type === '02'">
+                      <v-text-field
+                        mask="date"
+                        label="MM/YY"
+                        title="VALID THRU"
+                        light
+                      />
+                    </v-flex>
                   </v-container>
 
                   <v-layout row justify-center>

@@ -8,7 +8,7 @@
       <v-content>
         <v-container fluid fill-height>
           <v-layout align-center justify-center>
-            <v-flex xs12 sm8 md4>
+            <v-flex xs12 sm8 md8 lg6>
               <v-card class="elevation-12">
                 <v-toolbar dark color="primary">
                   <v-toolbar-title>Your Profile</v-toolbar-title>
@@ -22,6 +22,15 @@
                       <v-list-tile-content>
                         <v-list-tile-title>{{info.username}}</v-list-tile-title>
                         <v-list-tile-sub-title>Username</v-list-tile-sub-title>
+                      </v-list-tile-content>
+                    </v-list-tile>
+                    <v-list-tile>
+                      <v-list-tile-action>
+                        <v-icon color="lighten-1">fa-address-card</v-icon>
+                      </v-list-tile-action>
+                      <v-list-tile-content>
+                        <v-list-tile-title>{{info.email}}</v-list-tile-title>
+                        <v-list-tile-sub-title>Email</v-list-tile-sub-title>
                       </v-list-tile-content>
                     </v-list-tile>
                     <v-list-tile>
@@ -58,6 +67,10 @@
                     <v-icon left dark>fa-long-arrow-alt-left</v-icon>Back
                   </v-btn>
                   <v-spacer></v-spacer>
+                  <v-btn color="warning" to="/profile/password">
+                    Change Password
+                    <v-icon right dark>fa-lock</v-icon>
+                  </v-btn>
                   <v-btn color="success" to="/profile/edit">
                     Edit
                     <v-icon right dark>fa-edit</v-icon>
