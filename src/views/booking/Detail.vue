@@ -26,13 +26,16 @@
                           <br>
                           Price : {{room.room.price}}
                           <br>
-                          Type : {{room.room.type}}
+                          Type : {{room.room.type.title}}
                         </span>
                       </div>
                     </v-card-title>
-                    <v-card-actions>
+                    <v-card-actions v-if="booking.status === 'Checked In'">
                       <v-btn color="success" dark :to="`/booking/privilege/${room.id}`">Privileges</v-btn>
                       <v-btn color="success" dark :to="`/service/${room.id}`">Services</v-btn>
+                    </v-card-actions>
+                    <v-card-actions v-else>
+                      <p>Please Check-in before using our services</p>
                     </v-card-actions>
                   </v-card>
                 </v-flex>

@@ -39,13 +39,19 @@
                         Date {{ booking.start_date }} to {{ booking.end_date }}
                         <br>
                         Total Room : {{ booking.detail.length }}
+                        <br>
+                        Status : {{booking.status}}
                       </span>
                     </div>
                   </v-card-title>
                   <v-card-actions>
                     <v-btn color="success" dark :to="`/booking/detail/${booking.id}`">Detail</v-btn>
                     <v-btn color="#77C6FF" :to="`/booking/receipt/${booking.id}`">Receipt</v-btn>
-                    <v-btn color="error" :to="`/booking/checkout/${booking.id}`">Check out</v-btn>
+                    <v-btn
+                      color="error"
+                      :to="`/booking/checkout/${booking.id}`"
+                      v-if="booking.status === 'Checked In'"
+                    >Check out</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-flex>
