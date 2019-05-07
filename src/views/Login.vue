@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-content>
+    <v-content id="login-page">
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md4>
@@ -64,6 +64,7 @@ instance.interceptors.response.use(response => {
 export default {
   data: function () {
     return {
+
     }
   },
   computed: {
@@ -98,5 +99,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+#login-page {
+  background-image: url("../assets/background.jpg");
+}
 </style>
