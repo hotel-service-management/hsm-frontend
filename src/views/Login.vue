@@ -14,7 +14,7 @@
                     prepend-icon="fa-user"
                     name="email"
                     v-model="email"
-                    label="E-Mail"
+                    label="Email Address"
                     type="text"
                     :error-messages="error.email"
                   />

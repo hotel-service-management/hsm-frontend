@@ -21,7 +21,7 @@
                   <v-text-field
                     prepend-icon="fa-inbox"
                     name="email"
-                    label="E-mail Address"
+                    label="Email Address"
                     type="email"
                     v-model="register.email"
                     :error-messages="error.email"
@@ -62,7 +62,7 @@
                     prepend-icon="fa-phone"
                     mask="phone"
                     name="phone"
-                    label="Phone Number"
+                    label="Phone number"
                     type="text"
                     v-model="register.phone"
                     :error-messages="error.phone"

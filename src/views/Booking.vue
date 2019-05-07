@@ -15,7 +15,7 @@
                   <span
                     class="subheading"
                     v-show="bookings.length == 0"
-                  >It seems like you do not have any booking yet.</span>
+                  >Seems like you do not have any booking yet.</span>
                   <!-- <v-divider class="my-3"></v-divider> -->
                   <div class="title mb-3" style="font-size : 10em;" v-if="bookings.length == 0">Create your first booking now!</div>
                   <div class="title mb-3" style="font-size : 10em;" v-else>Create your booking now!</div>
@@ -37,7 +37,7 @@
                     <div>
                       <div class="headline">Booking #{{ booking.id }}</div>
                       <span>
-                        Date {{ booking.start_date }} to {{ booking.end_date }}
+                        Date : {{ booking.start_date }} to {{ booking.end_date }}
                         <br>
                         Total Room : {{ booking.detail.length }}
                         <br>

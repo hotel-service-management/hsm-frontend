@@ -35,7 +35,7 @@
                       <v-btn color="success" dark :to="`/service/${room.id}`">Services</v-btn>
                     </v-card-actions>
                     <v-card-actions v-else>
-                      <p>Please Check-in before using our services</p>
+                      <p>Check-in is required to use our services.</p>
                     </v-card-actions>
                   </v-card>
                 </v-flex>

@@ -8,15 +8,16 @@
           <v-flex xs12 sm8 md4>
             <v-card class="elevation-12">
               <v-toolbar dark color="primary">
-                <v-toolbar-title>Payment Completed, Thank You!</v-toolbar-title>
+                <v-toolbar-title>Payment completed. Thank you!</v-toolbar-title>
               </v-toolbar>
               <v-container
                 text-xs-center
                 style="color:red; font-size: 2em"
-              >Please Check-in before 14:00</v-container>
+              >Please check-in before 2 PM.</v-container>
               <v-container
                 text-xs-center
-              >Bring Your indentication documentation when check in otherwise check-in will be void</v-container>
+              >Indentification documents are required in the check-in process.<br>
+              Otherwise, check-in will be void.</v-container>
               <v-card-actions>
                 <v-layout justify-center>
                   <v-btn color="success" to="/booking">
@@ -33,12 +34,11 @@
 </template>
 
 <script>
-
-import NavBar from '@/components/NavBar.vue'
+import NavBar from "@/components/NavBar.vue";
 
 export default {
   components: {
     NavBar
   }
-}
+};
 </script>
