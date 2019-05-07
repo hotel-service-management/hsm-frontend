@@ -40,7 +40,9 @@ export default {
       }
     },
     deleteService ({ state, commit }, index) {
-      commit('setCart', state.cart.splice(index, 1))
+      let cart = state.cart
+      cart.splice(index, 1)
+      commit('setCart', cart)
     },
     async doSubmitOrder ({ state, commit }, id) {
       if (confirm('Are you sure to order?')) {
