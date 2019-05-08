@@ -15,7 +15,6 @@
             </v-list-tile-avatar>
             <v-list-tile-content>
               <v-list-tile-title>{{info.first_name}} {{info.last_name}}</v-list-tile-title>
-              <v-list-item-subtitle>Logged in</v-list-item-subtitle>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
