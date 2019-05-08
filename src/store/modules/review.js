@@ -32,15 +32,17 @@ export default {
       }
     },
     async doEditReview ({ commit, state }, id) {
-      let review = await authInstance.patch(`/review/${id}/`, { ...state.review }).then(r => r.data)
+      let review = await authInstance.patch(`/review/${id}/`, { ...state.review }).then(r => r.data).catch(e => e.response.data)
 
-      if (review.error) {
+      console.log(review)
+
+      if (review.errors) {
         commit('setError', {
-          ...review.error
+          ...review.errors
         })
       }
 
-      if (!review.error) {
+      if (!review.errors) {
         commit('setReviewForm', {})
         commit('setError', {})
         router.push('/review')

@@ -6,9 +6,8 @@
     v-model="drawerOpen"
     app
   >
-
     <v-list>
-        <v-toolbar flat class="transparent">
+      <v-toolbar flat class="transparent">
         <v-list class="pa-0">
           <v-list-tile avatar>
             <v-list-tile-avatar>
@@ -16,7 +15,7 @@
             </v-list-tile-avatar>
             <v-list-tile-content>
               <v-list-tile-title>{{info.first_name}} {{info.last_name}}</v-list-tile-title>
-              <v-list-item-subtitle >Logged in</v-list-item-subtitle>
+              <v-list-item-subtitle>Logged in</v-list-item-subtitle>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
@@ -68,8 +67,12 @@ export default {
       drawerMini: 'navigation/drawerMini'
     }),
     ...mapActions({
-      doLogout: 'user/doLogout'
+      doLogout: 'user/doLogout',
+      doGetInfo: 'user/doGetInfo'
     })
+  },
+  beforeMount () {
+    this.doGetInfo()
   }
 }
 </script>

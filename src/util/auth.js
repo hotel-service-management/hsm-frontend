@@ -28,7 +28,7 @@ async function fetchAccessToken () {
 }
 
 authInstance.interceptors.response.use((response) => response, (error) => {
-  const { config, response: { status } } = error
+  const { config, response: { status, data } } = error
   let originalRequest = config
 
   originalRequest['baseURL'] = '/'

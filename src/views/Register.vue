@@ -64,8 +64,8 @@
                     name="phone"
                     label="Phone number"
                     type="text"
-                    v-model="register.phone"
-                    :error-messages="error.phone"
+                    v-model="register.phone_number"
+                    :error-messages="error.phone_number"
                   ></v-text-field>
                   <v-textarea
                     prepend-icon="fa-address-card"
