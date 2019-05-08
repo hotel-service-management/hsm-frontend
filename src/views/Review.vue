@@ -32,7 +32,7 @@
                   <div
                     class="title mb-2"
                     style="font-size : 10em; color :rgb(132, 124, 136)"
-                  >What do think? Did you satisfied with us?</div>
+                  >What do you think? You can provide us your feedback.</div>
                 </v-flex>
               </v-layout>
             </v-container>

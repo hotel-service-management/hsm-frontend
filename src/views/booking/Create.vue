@@ -17,7 +17,7 @@
             row
             :value="dateChecker"
             color="error"
-            icon="warning"
+            icon="fa-exclamation-triangle"
             outline
           >Check-in date must come before check-out date.</v-alert>
           <v-layout row>
