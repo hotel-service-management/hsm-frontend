@@ -8,7 +8,7 @@
       <v-content>
         <v-container fluid>
           <v-layout row wrap justify-center>
-            <v-flex xs12 md5>
+            <v-flex xs12 md5 v-if="permission">
               <v-card class="elevation-12">
                 <v-form>
                   <v-toolbar dark color="primary">
@@ -49,6 +49,9 @@
                 </v-form>
               </v-card>
             </v-flex>
+            <v-flex v-else>
+              <h1 class="red--text">Permission Denied</h1>
+            </v-flex>
           </v-layout>
         </v-container>
       </v-content>
@@ -82,9 +85,12 @@ export default {
   },
   computed: {
     ...mapState({
-      'booking': state => state.booking.booking,
-      'error': state => state.review.error
-    })
+      booking: state => state.booking.booking,
+      error: state => state.review.error
+    }),
+    permission () {
+      return !(Object.entries(this.booking).length === 0 && this.booking.constructor === Object)
+    }
   },
   methods: {
     ...mapActions({
@@ -109,13 +115,15 @@ export default {
     this.getBooking(this.id).then(() => {
       let review = this.booking.review
 
-      delete review.created_at
-      delete review.updated_at
+      if (review) {
+        delete review.created_at
+        delete review.updated_at
 
-      this.form = review
-      this.reviewId = review.id
+        this.form = review
+        this.reviewId = review.id && this.id
 
-      delete review.id
+        delete review.id
+      }
     })
   }
 }

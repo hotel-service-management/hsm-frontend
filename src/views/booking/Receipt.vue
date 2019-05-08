@@ -8,7 +8,7 @@
       <v-content>
         <v-container fluid fill-height>
           <v-layout justify-center align-center>
-            <v-flex md6 xs12>
+            <v-flex md6 xs12 v-if="permission">
               <v-card color="blue" dark>
                 <v-card-title primary-title>
                   <div class="headline">Booking #{{id}} Receipt ({{booking.night}} Nights)</div>
@@ -55,6 +55,9 @@
                 </v-card-actions>
               </v-card>
             </v-flex>
+            <v-flex v-else>
+              <h1 class="red--text">Permission Denied</h1>
+            </v-flex>
           </v-layout>
         </v-container>
       </v-content>
@@ -93,6 +96,9 @@ export default {
       service = service.reduce((a, b) => a + b.order_set.reduce((a, b) => a + b.total_price, 0), 0)
 
       return booking + service
+    },
+    permission () {
+      return !(Object.entries(this.booking).length === 0 && this.booking.constructor === Object)
     }
   },
   methods: {

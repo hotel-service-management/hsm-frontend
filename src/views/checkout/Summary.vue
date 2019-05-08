@@ -10,7 +10,7 @@
           <v-layout row>
             <h1>Check-out Summary</h1>
           </v-layout>
-          <v-layout row wrap>
+          <v-layout row wrap v-if="permission">
             <v-flex xs12 sm12 md6 pa-2>
               <v-container fluid>
                 <v-card color="blue" dark v-if="total > 0">
@@ -109,6 +109,11 @@
               </v-container>
             </v-flex>
           </v-layout>
+          <v-layout row wrap v-else>
+            <v-flex>
+              <h1 class="red--text">Permission Denied</h1>
+            </v-flex>
+          </v-layout>
         </v-container>
       </v-content>
     </v-wait>
@@ -146,6 +151,9 @@ export default {
       service = service.reduce((a, b) => a + b.order_set.reduce((a, b) => a + b.total_price, 0), 0)
 
       return service
+    },
+    permission () {
+      return !(Object.entries(this.booking).length === 0 && this.booking.constructor === Object)
     }
   },
   methods: {
