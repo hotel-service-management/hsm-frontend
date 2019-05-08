@@ -6,6 +6,7 @@
         <loading/>
       </template>
       <v-content>
+
         <v-container fill-height v-if="bookings.length == 0">
           <v-container fill-height>
             <v-layout align-center>
@@ -21,6 +22,22 @@
             </v-layout>
           </v-container>
         </v-container>
+          <v-container fluid v-show="bookings.length > 0">
+          <v-container fill-height>
+            <v-container fill-height>
+              <v-layout align-center>
+                <v-flex>
+                  <h3 class style="color: #43A3F5;font-size : 7em; ">Tell Us</h3>
+                  <!-- <v-divider class="my-3"></v-divider> -->
+                  <div
+                    class="title mb-2"
+                    style="font-size : 10em; color :rgb(132, 124, 136)"
+                  >What do think? Did you satisfied with us?</div>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-container>
+          </v-container>
         <v-container fluid v-show="bookings.length > 0">
           <v-layout row>
             <h1>Your Reviews</h1>
