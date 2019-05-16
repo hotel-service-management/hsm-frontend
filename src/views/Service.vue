@@ -75,7 +75,7 @@
           </v-layout>
         </v-container>
       </v-content>
-      <v-bottom-nav :active.sync="type" :value="true" absolute color="transparent" fixed>
+      <v-bottom-nav :active.sync="type" :value="true" :fixed="true" :app="true">
         <v-btn color="teal" flat value="all">
           <span>All Services</span>
           <v-icon>fa-globe</v-icon>
