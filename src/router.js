@@ -53,6 +53,14 @@ let router = new Router({
       }
     },
     {
+      path: '/location',
+      name: 'location',
+      component: () => import('./views/Location.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: '/booking',
       name: 'booking',
       component: () => import('./views/Booking.vue'),

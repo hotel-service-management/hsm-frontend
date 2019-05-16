@@ -14,6 +14,7 @@ export default {
     items: [
       // { title: 'Dashboard', icon: 'fa-tachometer-alt', link: '/dashboard' },
       { title: 'Booking', icon: 'fa-book', link: '/booking' },
+      { title: 'Location', icon: 'fa-compass', link: '/location' },
       // { title: 'Booking Detail', icon: 'fa-book-open', link: '/booking' },
       // { title: 'Privileges', icon: 'fa-certificate', link: '/privilege' },
       // { title: 'Services', icon: 'fa-concierge-bell', link: '/service' },
