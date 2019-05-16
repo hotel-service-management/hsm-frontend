@@ -14,7 +14,7 @@
             <v-flex xs12 md8>
               <v-container fluid grid-list-lg fill-height>
                 <v-layout row wrap>
-                  <v-flex xs12 md6 v-for="service in services" :key="service.id">
+                  <v-flex xs12 md6 v-for="service in filteredService" :key="service.id">
                     <v-card color="blue" dark>
                       <v-card-title primary-title>
                         <div>
@@ -75,6 +75,22 @@
           </v-layout>
         </v-container>
       </v-content>
+      <v-bottom-nav :active.sync="type" :value="true" absolute color="transparent">
+        <v-btn color="teal" flat value="all">
+          <span>All Services</span>
+          <v-icon>fa-globe</v-icon>
+        </v-btn>
+
+        <v-btn color="teal" flat value="Food">
+          <span>Foods</span>
+          <v-icon>fa-pizza-slice</v-icon>
+        </v-btn>
+
+        <v-btn color="teal" flat value="Service">
+          <span>Services</span>
+          <v-icon>fa-concierge-bell</v-icon>
+        </v-btn>
+      </v-bottom-nav>
     </v-wait>
   </v-app>
 </template>
@@ -95,7 +111,7 @@ export default {
   },
   data: () => {
     return {
-
+      type: 'all'
     }
   },
   computed: {
@@ -106,6 +122,9 @@ export default {
     total () {
       let total = this.cart.reduce((a, b) => a + b.price, 0)
       return total
+    },
+    filteredService () {
+      return this.type === 'all' ? this.services : this.services.filter(s => s.type === this.type)
     }
   },
   methods: {
