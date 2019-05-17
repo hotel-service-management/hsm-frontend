@@ -110,7 +110,7 @@ export default {
         cpassword: '',
         first_name: '',
         last_name: '',
-        phone: '',
+        phone_number: '',
         address: ''
       }
     }
