@@ -10,13 +10,14 @@
               <v-toolbar dark color="primary">
                 <v-toolbar-title>Payment completed. Thank you!</v-toolbar-title>
               </v-toolbar>
-              <v-container
-                text-xs-center
-                style="color:red; font-size: 2em"
-              >Please check-in before 2 PM.</v-container>
-              <v-container text-xs-center>
-                Identification documents are required in the check-in process;
-                <br>otherwise this booking will be void.
+              <v-container>
+                <h2
+                  style="color:red; font-size: 2em; text-align:center;"
+                >Please check-in before 2 PM.</h2>Note:
+                <ol>
+                  <li>Identification documents are required in the check-in process; otherwise this booking will be void.</li>
+                  <li>If you've selected Cash method please pay at Check-in counter</li>
+                </ol>
               </v-container>
               <v-card-actions>
                 <v-layout justify-center>

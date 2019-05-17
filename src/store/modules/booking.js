@@ -64,6 +64,10 @@ export default {
       }
     },
     async doPayment ({ dispatch }, payment) {
+      if (payment.type === '01') {
+        router.push('/payment/completed')
+      }
+
       if (confirm('Are you sure to proceed?')) {
         let pay = await authInstance.post(`/payment/`, { ...payment }).then(r => r.data)
 
@@ -73,6 +77,10 @@ export default {
       }
     },
     async doPaymentCheckout ({ dispatch }, payment) {
+      if (payment.type === '01') {
+        router.push('/payment/completed')
+      }
+
       if (confirm('Are you sure to proceed?')) {
         let pay = await authInstance.post(`/payment/`, { ...payment }).then(r => r.data)
 
