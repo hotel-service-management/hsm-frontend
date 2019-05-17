@@ -101,10 +101,12 @@ export default {
       }
 
       if (!user.error) {
-        await commit('setEmail', state.register.email)
-        await commit('setPassword', state.register.password)
+        // await commit('setEmail', state.register.email)
+        // await commit('setPassword', state.register.password)
 
-        dispatch('doLogin')
+        // dispatch('doLogin')
+
+        router.push('/')
 
         commit('setRegisterForm', {})
         commit('setError', {})
