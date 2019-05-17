@@ -61,19 +61,17 @@ export default {
     }
   },
   actions: {
-    async doLogin ({ commit, state }) {
+    async doLogin ({ commit, state, dispatch }) {
       let token = await instance.post('/api/auth/login', { email: state.email, password: state.password })
       if (!token.error) {
         localStorage.setItem('access', token.access)
         localStorage.setItem('refresh', token.refresh)
         commit('setToken', token)
 
-        let info = await authInstance.get('/auth/user').then(r => r.data)
-
         commit('setEmail', '')
         commit('setPassword', '')
         commit('setError', {})
-        commit('setUser', { ...info.user })
+        dispatch('doGetInfo')
 
         router.push('/booking')
       }

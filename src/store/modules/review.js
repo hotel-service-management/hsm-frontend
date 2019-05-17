@@ -34,8 +34,6 @@ export default {
     async doEditReview ({ commit, state }, id) {
       let review = await authInstance.patch(`/review/${id}/`, { ...state.review }).then(r => r.data).catch(e => e.response.data)
 
-      console.log(review)
-
       if (review.errors) {
         commit('setError', {
           ...review.errors

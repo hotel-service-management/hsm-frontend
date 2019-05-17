@@ -120,7 +120,7 @@ export default {
         delete review.updated_at
 
         this.form = review
-        this.reviewId = review.id && this.id
+        this.reviewId = review.id
 
         delete review.id
       }
