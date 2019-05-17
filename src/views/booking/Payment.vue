@@ -22,7 +22,7 @@
                     <v-layout row wrap>
                       <v-flex xs12 md12>
                         <v-select
-                          :items="[{id:'02', title:'Credit Card'}]"
+                          :items="[{id:'01', title:'Cash'}, {id:'02', title:'Credit Card'}]"
                           item-value="id"
                           item-text="title"
                           label="Payment Method"
