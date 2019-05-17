@@ -64,8 +64,10 @@ export default {
       }
     },
     async doPayment ({ dispatch }, payment) {
-      if (payment.type === '01') {
+      console.log(payment)
+      if (payment.payment_type === '01') {
         router.push('/payment/completed')
+        return
       }
 
       if (confirm('Are you sure to proceed?')) {
@@ -77,8 +79,9 @@ export default {
       }
     },
     async doPaymentCheckout ({ dispatch }, payment) {
-      if (payment.type === '01') {
+      if (payment.payment_type === '01') {
         router.push('/payment/completed')
+        return
       }
 
       if (confirm('Are you sure to proceed?')) {
