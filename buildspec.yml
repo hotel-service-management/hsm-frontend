@@ -1,0 +1,25 @@
+version: 0.2
+phases:
+  install: # Install AWS cli, kubectl (needed for Helm) and Helm
+    commands:
+      - apt install -y git python3
+      - pip install --upgrade awscli
+      - curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.12.7/2019-03-27/bin/linux/amd64/aws-iam-authenticator
+      - chmod +x ./aws-iam-authenticator
+      - mkdir -p ~/bin && cp ./aws-iam-authenticator ~/bin/aws-iam-authenticator && export PATH=~/bin:$PATH
+      - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+      - chmod +x kubectl
+      - mv ./kubectl /usr/local/bin/kubectl
+  build: # Build Docker image and tag it with the commit sha
+    commands:
+      - docker build . -t $IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - docker tag $IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
+  post_build: # Push the Docker image to the ECR
+    commands:
+      - $(aws ecr get-login --no-include-email --region ap-southeast-1)
+      - export KUBECONFIG=$HOME/.kube/config
+      - aws eks update-kubeconfig --name hsm-cluster --region ap-southeast-1
+      - kubectl config use-context arn:aws:eks:ap-southeast-1:361698339280:cluster/hsm-cluster
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME-static:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - kubectl set image -n hsm deployment/hsm-frontend hsm-frontend=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
