@@ -98,6 +98,7 @@ export default {
   height: 100vh;
   background-attachment: fixed;
   background-repeat: no-repeat;
+  background-size: cover;
   position: center;
 }
 .subheading {
