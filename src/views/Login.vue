@@ -108,5 +108,6 @@ export default {
 <style scoped>
 #login-page {
   background-image: url("../assets/background.jpg");
+  background-size: cover;
 }
 </style>

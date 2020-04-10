@@ -151,5 +151,6 @@ export default {
 <style>
 #register-page {
   background-image: url("../assets/background.jpg");
+  background-size: cover;
 }
 </style>
